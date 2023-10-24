@@ -26,7 +26,7 @@ function Navbar() {
         <Flex
             direction="row"
             bg="#F2F2F2"
-            mih={60}
+            mih={70}
             justify="space-between"
             align="center"
             pt={5}
@@ -36,7 +36,16 @@ function Navbar() {
         >
             <img src={rlogo} alt="tmpLogo" style={{ width: rem(45), height: rem(45) }}/>
 
-            <Button variant="filled" color="#288BE2" size="md" visibleFrom="md">Button</Button>
+            <Flex
+            direction="row"
+            miw={300}
+            justify="space-evenly"
+            align="center"
+            visibleFrom="md"
+            >         
+            <Button variant="filled" color="#288BE2" size="md">Sign Up</Button>
+            <Button variant="subtle" color="#288BE2" size="md">Log In</Button>
+            </Flex>
             <Menu hiddenFrom="md" opened={opened} onChange={toggleDropdown}>
 
                 <Menu.Target>
