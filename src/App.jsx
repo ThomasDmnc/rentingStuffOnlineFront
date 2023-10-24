@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import '@mantine/core/styles.css';
 import Navbar from './components/Navbar';
-import EquipmentCard from './components/Card';
-import CardGrid from './components/CardGrid';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Homepage from './pages/Homepage';
 
 function App() {
-  const [equipments, setEquipments] = useState();
-
   return (
     <> 
     <Navbar />
+    <Routes>
+      <Route path="/" element={<Homepage/ >}/>
+      {/* <Route path="/login" element={<LogInPage />}/>
+      <Route path="/signup" element={<SignUpPage />}/> */}
+    </Routes>
     </>
   )
 }
