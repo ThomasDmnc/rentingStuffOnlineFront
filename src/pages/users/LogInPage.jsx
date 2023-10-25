@@ -10,7 +10,7 @@ function LoginPage() {
     password: '',
   });
 
-  const { authenticateUser } = useContext(AuthContext);
+  const { authenticateUser, storeToken } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ function LoginPage() {
         "Access-Control-Allow-Origin": true
       }})
       .then((response) => {
+        storeToken(response.data.token)
         authenticateUser(response.data.token)
         navigate('/'); 
       })
