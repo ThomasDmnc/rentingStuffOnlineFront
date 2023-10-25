@@ -6,6 +6,8 @@ import Homepage from './pages/Homepage';
 import SignupPage from './pages/users/SignUpPage';
 import LoginPage from './pages/users/LogInPage';
 import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
+import UserListings from './pages/users/UserListingsPage';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const containerProps = {
@@ -17,8 +19,17 @@ function App() {
     <Container {...containerProps}>
       <Routes>
         <Route path="/" element={<Homepage/ >}/>
-        <Route path="/login" element={<LoginPage />}/>
         <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
+
+        
+        <Route path="/my-listings" element={
+          <PrivateRoute> 
+            <UserListings />
+          </PrivateRoute>
+        }/>
+        
+
+        <Route path="/login" element={<LoginPage />}/>
         <Route path="/signup" element={<SignupPage />}/>
       </Routes>
     </Container>
