@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProviderWrapper } from './contexts/AuthContext.jsx';
 
 import { MantineProvider, createTheme } from '@mantine/core';
+
 const theme = createTheme({
   breakpoints: {
     xs: '30em',
@@ -17,9 +19,11 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-      <MantineProvider theme={theme}>
-        <App />
-      </MantineProvider>
+      <AuthProviderWrapper>
+        <MantineProvider theme={theme}>
+          <App />
+        </MantineProvider>
+      </AuthProviderWrapper>
     </Router>
   </React.StrictMode>,
 )

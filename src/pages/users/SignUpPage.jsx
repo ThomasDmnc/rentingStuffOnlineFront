@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Container, Paper, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ function SignupPage() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +25,15 @@ function SignupPage() {
     console.log('Username:', username);
     console.log('Email:', email);
     console.log('Password:', password);
-
+    
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, formData)
+    .then((response) => {
+      navigate('/login')
+    })
+    .catch((err) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    })
   };
 
   return (
