@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CardGrid from "../components/CardGrid";
 import axios from "axios";
-import { Title } from '@mantine/core';
+import { Title, Flex, Text } from '@mantine/core';
 
 function Homepage() {
     const [equipments, setEquipments] = useState('');
@@ -23,8 +23,15 @@ function Homepage() {
     return ( 
         <>
             <section className="banner">
-                <Title order={1} fw={900}>Renting Stuff Online</Title>
-                <p>The place where you get what you want</p>
+                <Flex
+                    direction="column"
+                    align="center"
+                    justify="center"
+                    mih="40vh"
+                >
+                <Title order={1} fw={900} c="#288BE2" size="52">Renting Stuff Online</Title>
+                <Text mt="2rem" fw={600}>The place where you get what you want</Text>
+                </Flex>
             </section>
 
             <section className="gridCtn">

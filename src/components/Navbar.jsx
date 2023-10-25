@@ -45,11 +45,11 @@ function Navbar() {
                     <img src={rlogo} alt="tmpLogo" style={{ width: rem(45), height: rem(45) }}/>
                 </Link>
                 <Flex
-                direction="row"
-                miw={300}
-                justify="space-evenly"
-                align="center"
-                visibleFrom="md"
+                    direction="row"
+                    miw={300}
+                    justify="space-evenly"
+                    align="center"
+                    visibleFrom="md"
                 >      
 
                 {isLoggedIn && (
