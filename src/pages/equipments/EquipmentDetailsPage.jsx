@@ -79,7 +79,7 @@ function EquipmentDetails() {
             <Text>Rated: {equipment.OwnedBy.comments.length} </Text>
         </section>
         <section>
-            <Title mt={20} order={3} fw={900} c="#288BE2">Comments:</Title>
+            <Title mt={20} order={3} fw={900} c="#F9C22E">Comments:</Title>
 
         </section>
 
