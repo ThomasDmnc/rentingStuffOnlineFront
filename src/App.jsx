@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import { Container } from '@mantine/core';
 import Navbar from './components/Navbar';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
@@ -7,15 +8,20 @@ import LoginPage from './pages/users/LogInPage';
 import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
 
 function App() {
+  const containerProps = {
+    h: '100vh'
+  }
   return (
     <> 
     <Navbar />
-    <Routes>
-      <Route path="/" element={<Homepage/ >}/>
-      <Route path="/login" element={<LoginPage />}/>
-      <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
-      <Route path="/signup" element={<SignupPage />}/>
-    </Routes>
+    <Container {...containerProps}>
+      <Routes>
+        <Route path="/" element={<Homepage/ >}/>
+        <Route path="/login" element={<LoginPage />}/>
+        <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
+        <Route path="/signup" element={<SignupPage />}/>
+      </Routes>
+    </Container>
     </>
   )
 }

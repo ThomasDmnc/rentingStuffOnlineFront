@@ -41,8 +41,9 @@ function Navbar() {
                 pr={25}
                 pl={25}
             >
-                <img src={rlogo} alt="tmpLogo" style={{ width: rem(45), height: rem(45) }}/>
-
+                <Link to='/'>
+                    <img src={rlogo} alt="tmpLogo" style={{ width: rem(45), height: rem(45) }}/>
+                </Link>
                 <Flex
                 direction="row"
                 miw={300}
