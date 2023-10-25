@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Paper, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignupPage() {
   const [formData, setFormData] = useState({
-    username: '',
+    lastName: '',
+    firstName: '',
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +21,26 @@ function SignupPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { username, email, password } = formData;
+    const { firstName, lastName, email, password } = formData;
 
-    console.log('Username:', username);
+    console.log('Username:', firstName);
+    console.log('Username:', lastName);
     console.log('Email:', email);
     console.log('Password:', password);
-
+    
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, JSON.stringify(formData), {
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": true
+      }
+    })
+    .then((response) => {
+      navigate('/login')
+    })
+    .catch((err) => {
+      const errorDescription = err.response.data.message;
+      console.log(errorDescription);
+    })
   };
 
   return (
@@ -31,9 +49,15 @@ function SignupPage() {
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <TextInput
-            label="Username"
-            name="username"
-            value={formData.username}
+            label="First Name"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            label="Last Name"
+            name="lastName"
+            value={formData.lastName}
             onChange={handleInputChange}
           />
           <TextInput
@@ -47,13 +71,6 @@ function SignupPage() {
             label="Password"
             name="password"
             type="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-           <TextInput
-            label="Re-Enter Password"
-            name="Re-password"
-            type="Re-password"
             value={formData.password}
             onChange={handleInputChange}
           />

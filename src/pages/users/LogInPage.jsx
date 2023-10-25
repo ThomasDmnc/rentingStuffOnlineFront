@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Container, Paper, TextInput, Button } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from '../../contexts/AuthContext.jsx'
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
+
+  const { authenticateUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,13 +22,25 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password } = formData;
-
-   
-    console.log('Username:', username);
+    const { email, password } = formData;
+    console.log('Username:', email);
     console.log('Password:', password);
+    
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, JSON.stringify(formData),{
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": true
+      }})
+      .then((response) => {
+        authenticateUser(response.data.token)
+        navigate('/'); 
+      })
+      .catch((error) => {
+        console.log(error)
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      })
 
-  
   };
 
   return (
@@ -31,9 +49,9 @@ function LoginPage() {
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
           <TextInput
-            label="Username"
-            name="username"
-            value={formData.username}
+            label="Email Address"
+            name="email"
+            value={formData.email}
             onChange={handleInputChange}
           />
           <TextInput
