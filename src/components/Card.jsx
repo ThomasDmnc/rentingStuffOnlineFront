@@ -1,8 +1,9 @@
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 function EquipmentCard(props) {
 
-  console.log(props)
+  console.log(`/equipements/${props.props._id}`)
     return (
       <>
         <Card key={props.props._id} shadow="sm" padding="lg" radius="md" withBorder>
@@ -20,10 +21,12 @@ function EquipmentCard(props) {
               On Sale
             </Badge>
           </Group>
-
-          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-            Book classic tour now
-          </Button>
+          
+          <Link to={`/equipments/${props.props._id}`} >
+            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+              Book classic tour now
+            </Button>
+          </Link>
         </Card>
       </>
     );
