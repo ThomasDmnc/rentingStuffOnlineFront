@@ -84,16 +84,13 @@ function Navbar() {
                     <Menu.Dropdown>
                     {isLoggedIn && (
                     <>  
-                        <Link>
-                            <Menu.Item leftSection={<IconTools style={{ width: rem(14), height: rem(14) }} />}>
+                            <Menu.Item component={Link} to={`/`} leftSection={<IconTools style={{ width: rem(14), height: rem(14) }} />}>
                             My Equipments
                             </Menu.Item>
-                        </Link>
-                        <Link>
-                            <Menu.Item leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
+                            <Menu.Item component={Link} to={`/`} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
                             My Requests
                             </Menu.Item>
-                        </Link>
+                            <Menu.Divider />
                         <Menu.Item onClick={logOutUser} leftSection={<IconUserEdit style={{ width: rem(14), height: rem(14) }} />}> 
                         Log Out
                         </Menu.Item>
