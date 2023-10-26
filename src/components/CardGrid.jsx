@@ -2,14 +2,26 @@ import { Grid, Flex, Button } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EquipmentCard from './Card';
+import axios from 'axios';
 
 function CardGrid({ isUpdate, allEquipments }) {
     const [equipments, setEquipments] = useState();
     console.log(isUpdate)
+
     useEffect(() => {
         setEquipments(allEquipments)
-    })
+    }, [allEquipments])
 
+    const handleDelete = (equipment) => {
+        axios.delete(`${import.meta.env.VITE_API_URL}/api/equipments/${equipment._id}`)
+        .then((response) => {
+            const newEquipments = equipments.filter(function(el) { return el != equipment; })
+            setEquipments(newEquipments)
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)})
+    }
+ 
     return (  
         <Grid gutter="lg"  spacing="lg">
         {equipments && equipments.map((equipment) => {
@@ -24,7 +36,7 @@ function CardGrid({ isUpdate, allEquipments }) {
                                 align="center"
                             >
                                 <Button component={Link} to={`/equipments/${equipment._id}`} variant="filled" color="#288BE2" fullWidth mt="md" radius="md" mr={2}>Edit</Button>
-                                <Button component={Link} to={`/equipments/${equipment._id}`} variant="filled" color="#E01A4F" fullWidth mt="md" radius="md" ml={2} >Delete</Button>
+                                <Button onClick={() => handleDelete(equipment)} variant="filled" color="#E01A4F" fullWidth mt="md" radius="md" ml={2}>Delete</Button>
                             </Flex>
                         </>
                     ) : ''}
