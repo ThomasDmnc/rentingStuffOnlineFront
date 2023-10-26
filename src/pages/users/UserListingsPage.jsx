@@ -7,12 +7,10 @@ import CardGrid from '../../components/CardGrid.jsx';
 
 function UserListings() {
     const [equipments, setEquipments] = useState();
-    
     const { user } = useContext(AuthContext);
+    const [userId, setuserId] = useState(user.userId);
 
-      const [userId, setuserId] = useState(user.userId);
-
-      const getEquipments = () => {
+    const getEquipments = () => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/equipments?OwnedBy=${userId}`)
         .then((response) =>{
             setEquipments(response.data)

@@ -1,14 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Badge, Loader, Flex, SimpleGrid, Image, Title, Text, Button, rem } from '@mantine/core';
 import { IconBoxSeam } from '@tabler/icons-react';
+import { AuthContext } from '../../contexts/AuthContext.jsx'
 
 function EquipmentDetails() {
     const [ equipment, setEquipment ] = useState();
     const { equipmentId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const icon = <IconBoxSeam style={{ width: rem(12), height: rem(12) }} />;
+    const { isLoggedIn } = useContext(AuthContext);
 
     const getEquipment = () => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
@@ -80,7 +82,13 @@ function EquipmentDetails() {
         </section>
         <section>
             <Title mt={20} order={3} fw={900} c="#F9C22E">Comments:</Title>
-
+            { isLoggedIn ? (
+                <>
+                    <Text>Did you rented this equipment from {equipment.OwnedBy.firstName} {equipment.OwnedBy.lastName}?</Text>
+                    <Text>Please leave a comment:</Text>
+                    <Button component={Link} to={`/createComment?owner=${equipment.OwnedBy._id}`} mt={20} variant="filled" color="#288BE2" size="md">Add a comment</Button>
+                </>
+            ) : ""}
         </section>
 
         </>
