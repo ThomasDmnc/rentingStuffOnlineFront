@@ -46,7 +46,7 @@ function LoginPage() {
 
   return (
     <Container size="xs">
-      <Paper padding="xl">
+      <Paper  bg="#F2F2F2" padding="xl">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
           <TextInput
@@ -62,7 +62,7 @@ function LoginPage() {
             value={formData.password}
             onChange={handleInputChange}
           />
-          <Button type="submit" variant="filled">Login</Button>
+          <Button mt="2rem" type="submit" variant="filled">Login</Button>
         </form>
       </Paper>
     </Container>

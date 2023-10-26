@@ -35,7 +35,7 @@ function Homepage() {
             </section>
 
             <section className="gridCtn">
-                <CardGrid props={equipments} />
+                <CardGrid allEquipments={equipments} />
             </section>
         </>
     );

@@ -5,7 +5,6 @@ import { IconBoxSeam } from '@tabler/icons-react';
 function EquipmentCard(props) {
   const icon = <IconBoxSeam style={{ width: rem(12), height: rem(12) }} />;
 
-  console.log(`/equipements/${props.props._id}`)
     return (
       <>
         <Card key={props.props._id} shadow="sm" padding="lg" radius="md" withBorder>
@@ -17,7 +16,7 @@ function EquipmentCard(props) {
             />
           </Card.Section>
 
-          <Group justify="space-between" mt="md" mb="xs">
+          <Group mih="6rem" justify="space-between" mt="md" mb="xs">
             <Text fw={500}>{props.props.name}</Text>
             <Badge leftSection={icon} variant="light" color="#288BE2" size="lg" radius="md" tt="capitalize">{props.props.condition}</Badge>
           </Group>
