@@ -14,6 +14,9 @@ const theme = createTheme({
     lg: '74em',
     xl: '90em',
   },
+  background: '#F2F2F2',
+  fontFamily: 'Poppins, sans-serif',
+  headings: { fontFamily: 'Work Sans, sans-serif' },
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(

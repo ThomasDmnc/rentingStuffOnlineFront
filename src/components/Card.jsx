@@ -1,8 +1,10 @@
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { Card, Image, Text, Badge, Button, Group, rem } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { IconBoxSeam } from '@tabler/icons-react';
 
 function EquipmentCard(props) {
+  const icon = <IconBoxSeam style={{ width: rem(12), height: rem(12) }} />;
 
-  console.log(props)
     return (
       <>
         <Card key={props.props._id} shadow="sm" padding="lg" radius="md" withBorder>
@@ -14,16 +16,14 @@ function EquipmentCard(props) {
             />
           </Card.Section>
 
-          <Group justify="space-between" mt="md" mb="xs">
+          <Group mih="6rem" justify="space-between" mt="md" mb="xs">
             <Text fw={500}>{props.props.name}</Text>
-            <Badge color="pink" variant="light">
-              On Sale
-            </Badge>
+            <Badge leftSection={icon} variant="light" color="#288BE2" size="lg" radius="md" tt="capitalize">{props.props.condition}</Badge>
           </Group>
-
-          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-            Book classic tour now
-          </Button>
+          
+            <Button component={Link} to={`/equipments/${props.props._id}`}  variant="light" color="blue" fullWidth mt="md" radius="md">
+              More Details
+            </Button>
         </Card>
       </>
     );
