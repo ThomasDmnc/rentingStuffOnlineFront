@@ -6,7 +6,6 @@ import axios from 'axios';
 
 function CardGrid({ isUpdate, allEquipments }) {
     const [equipments, setEquipments] = useState();
-    console.log(isUpdate)
 
     useEffect(() => {
         setEquipments(allEquipments)

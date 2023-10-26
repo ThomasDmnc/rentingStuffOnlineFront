@@ -7,11 +7,8 @@ import CardGrid from '../../components/CardGrid.jsx';
 
 function UserListings() {
     const [equipments, setEquipments] = useState();
-    const { 
-        isLoggedIn,
-        logOutUser,
-        user
-      } = useContext(AuthContext);
+    
+    const { user } = useContext(AuthContext);
 
       const [userId, setuserId] = useState(user.userId);
 
@@ -41,10 +38,17 @@ function UserListings() {
                     <Text mt="1rem">Manage all your equipments from here</Text>
                 </Flex>
             </Group>
-            <Group grow mt="5vh" className="gridCtn">
-                <CardGrid allEquipments={equipments} isUpdate={true} />
-            </Group>
-            <Group grow mt="5vh">
+            { equipments ? (
+                <Text mt="5vh">
+                    You didn&apos;t add equipment yet…
+                </Text>
+                ) : (
+                <Group grow mt="5vh" className="gridCtn">
+                    <CardGrid allEquipments={equipments} isUpdate={true} />
+                </Group>
+            )}
+
+            <Group mt="5vh">
                 <Button component={Link} to={'/'} variant="filled" color="#F9C22E" mt="md" radius="md" mr={2}>Add a new Equipment</Button>
             </Group>
         </>
