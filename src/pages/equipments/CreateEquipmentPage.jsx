@@ -32,8 +32,22 @@ function CreateEquipment() {
   const [categories, setCategories] = useState();
   const [ownedBy, setOwnedBy] = useState(user.userId);
 
+  const [file, setFile] = useState(null);
+
   function uploadImage() {
-    //Upload on cloudymoudy and set imageUrl to cloud Url
+    const formData = new FormData();
+    formData.append("imageUrl", file);
+
+    axios
+      .put(`${import.meta.env.VITE_API_URL}/api/equipments/upload`, formData)
+      .then((response) => {
+        console.log(response);
+        setImageUrl(response.data.file);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+
     console.log("Uploading image");
   }
 
@@ -61,8 +75,6 @@ function CreateEquipment() {
         }
       )
       .then((response) => {
-        console.log(response);
-        //Change to navigate to user equipment page
         navigate("/my-listings");
       })
       .catch((error) => {
@@ -90,6 +102,8 @@ function CreateEquipment() {
               <FileInput
                 label="Equipment image"
                 placeholder="Enter Image Url"
+                value={file}
+                onChange={setFile}
               />
               <Button variant="filled" onClick={uploadImage}>
                 Upload

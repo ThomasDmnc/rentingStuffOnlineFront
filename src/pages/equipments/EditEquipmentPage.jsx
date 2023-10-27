@@ -29,10 +29,24 @@ function EditEquipment() {
   const [condition, setCondition] = useState("");
   const [categories, setCategories] = useState();
 
+  const [file, setFile] = useState(null);
+
   const [isLoading, setIsLoading] = useState(true);
 
   function uploadImage() {
-    //Upload on cloudymoudy and set imageUrl to cloud Url
+    const formData = new FormData();
+    formData.append("imageUrl", file);
+
+    axios
+      .put(`${import.meta.env.VITE_API_URL}/api/equipments/upload`, formData)
+      .then((response) => {
+        console.log(response);
+        setImageUrl(response.data.file);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+
     console.log("Uploading image");
   }
 
@@ -111,6 +125,8 @@ function EditEquipment() {
               <FileInput
                 label="Equipment image"
                 placeholder="Enter Image Url"
+                value={file}
+                onChange={setFile}
               />
               <Button variant="filled" onClick={uploadImage}>
                 Upload
