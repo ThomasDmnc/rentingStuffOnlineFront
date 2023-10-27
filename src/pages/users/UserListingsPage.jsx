@@ -23,7 +23,7 @@ function UserListings() {
 
   const getEquipments = () => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/equipments?OwnedBy=${userId}`)
+      .get(`${import.meta.env.VITE_API_URL}/api/equipments?ownedBy=${userId}`)
       .then((response) => {
         setEquipments(response.data);
         console.log(response.data);
@@ -37,6 +37,8 @@ function UserListings() {
     getEquipments();
   }, []);
 
+  console.log(equipments);
+
   return (
     <>
       <Group grow mt="5vh">
@@ -47,7 +49,7 @@ function UserListings() {
           <Text mt="1rem">Manage all your equipments from here</Text>
         </Flex>
       </Group>
-      {equipments ? (
+      {!equipments ? (
         <Text mt="5vh">You didn&apos;t add equipment yet…</Text>
       ) : (
         <Group grow mt="5vh" className="gridCtn">
