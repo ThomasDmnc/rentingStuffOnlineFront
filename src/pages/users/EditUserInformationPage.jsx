@@ -27,15 +27,15 @@ const EditUserInformationPage = () => {
   };
 
   const handleSaveChanges = () => {
-    const updatedUserData = {
-      imageUrl: userData?.imageUrl,
-      firstName: userData?.firstName,
-      lastName: userData?.lastName,
-      email: userData?.email,
-    };
+    
+    const formData = new FormData();
+    formData.append('imageUrl', file);
+    formData.append('firstName', userData.firstName);
+    formData.append('lastName', userData.lastName);
+    formData.append('email', userData.email);
 
     axios
-      .put(`${import.meta.env.VITE_API_URL}/api/user/${userId}`, updatedUserData)
+      .put(`${import.meta.env.VITE_API_URL}/api/user/upload/${userId}`, formData)
       .then((response) => {
         console.log('User data updated successfully');
         navigate('/profile');
@@ -50,19 +50,8 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-  const handleUploadImage = () => {
-    const formData = new FormData();
-    formData.append('imageUrl', file);
-
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/api/users/upload`, formData)
-      .then((response) => {
-        setUserData({ ...userData, imageUrl: response.data.fileUrl });
-      })
-      .catch((error) => {
-        console.error('Error updating user image:', error);
-      });
-  };
+  
+  
 
   return (
     <Container size="sm">
@@ -78,9 +67,7 @@ const EditUserInformationPage = () => {
                   alt={`${userData.firstName} ${userData.lastName}`}
                 />
                 <input type="file" accept="image/*" onChange={handleUpdateImage} />
-                <Button variant="filled" onClick={handleUploadImage}>
-                  Update Image
-                </Button>
+                
               </div>
             ) : null}
           </Grid.Col>

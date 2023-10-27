@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Container, Paper, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ function SignupPage() {
     firstName: '',
     email: '',
     password: '',
+    imgUrl: '', // Add imgUrl field
   });
   const navigate = useNavigate();
 
@@ -21,26 +22,24 @@ function SignupPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, password } = formData;
+    const { firstName, lastName, email, password, imgUrl } = formData;
 
-    console.log('Username:', firstName);
-    console.log('Username:', lastName);
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
     console.log('Email:', email);
     console.log('Password:', password);
-    
-    axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, JSON.stringify(formData), {
-      headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": true
-      }
-    })
-    .then((response) => {
-      navigate('/login')
-    })
-    .catch((err) => {
-      const errorDescription = err.response.data.message;
-      console.log(errorDescription);
-    })
+    console.log('Image URL:', imgUrl);
+
+    // Ensure you send the imgUrl in the request
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/auth/signup`, formData)
+      .then((response) => {
+        navigate('/login');
+      })
+      .catch((err) => {
+        const errorDescription = err.response.data.message;
+        console.log(errorDescription);
+      });
   };
 
   return (
@@ -74,7 +73,15 @@ function SignupPage() {
             value={formData.password}
             onChange={handleInputChange}
           />
-          <Button type="submit" variant="filled">Sign Up</Button>
+          <TextInput
+            label="Image URL" // Update the label for the imgUrl field
+            name="imgUrl"
+            value={formData.imgUrl}
+            onChange={handleInputChange}
+          />
+          <Button type="submit" variant="filled">
+            Sign Up
+          </Button>
         </form>
       </Paper>
     </Container>
