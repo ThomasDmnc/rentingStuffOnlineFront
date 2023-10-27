@@ -7,10 +7,7 @@ import {
   Title,
   Group,
   Text,
-  Button,
-  Burger,
-  Menu,
-  rem,
+  Button
 } from "@mantine/core";
 import CardGrid from "../../components/CardGrid.jsx";
 
