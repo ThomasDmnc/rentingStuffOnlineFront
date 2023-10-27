@@ -7,11 +7,17 @@ import Homepage from './pages/Homepage';
 import SignupPage from './pages/users/SignUpPage';
 import LoginPage from './pages/users/LogInPage';
 import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
+
+import UserInformationPage from './pages/users/UserInformationPage';
+import EditUserInformationPage from './pages/users/EditUserInformationPage';
+
+
 import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
 import CreateComment from './pages/comments/CreateCommentPage';
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 import EditEquipment from "./pages/equipments/EditEquipmentPage";
+
 
 function App() {
   const containerProps = {
@@ -24,6 +30,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage/ >}/>
         <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
+
+         <Route path="/profile" element=
+        {<PrivateRoute>
+        <UserInformationPage />
+        </PrivateRoute> }/>
+        <Route path="/edit-profile" element=
+        {<PrivateRoute>
+        <EditUserInformationPage />
+        </PrivateRoute> }/>
 
 
         <Route path="/createComment" element={
@@ -68,6 +83,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
         </Routes>
       </Container>
+
     </>
   );
 }
