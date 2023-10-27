@@ -67,7 +67,7 @@ const EditUserInformationPage = () => {
                   alt={`${userData.firstName} ${userData.lastName}`}
                 />
                 <input type="file" accept="image/*" onChange={handleUpdateImage} />
-                
+                 
               </div>
             ) : null}
           </Grid.Col>
