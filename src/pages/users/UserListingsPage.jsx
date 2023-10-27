@@ -11,8 +11,8 @@ function UserListings() {
     const [userId, setuserId] = useState(user.userId);
 
     const getEquipments = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/api/equipments?OwnedBy=${userId}`)
-        .then((response) =>{
+        axios.get(`${import.meta.env.VITE_API_URL}/api/equipments?ownedBy=${userId}`)
+        .then((response) => {
             setEquipments(response.data)
         }).catch((error) => {
             console.log(error)
@@ -36,7 +36,7 @@ function UserListings() {
                     <Text mt="1rem">Manage all your equipments from here</Text>
                 </Flex>
             </Group>
-            { equipments ? (
+            { !equipments ? (
                 <Text mt="5vh">
                     You didn&apos;t add equipment yet…
                 </Text>
