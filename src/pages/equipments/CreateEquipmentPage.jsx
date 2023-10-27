@@ -63,7 +63,7 @@ function CreateEquipment() {
       .then((response) => {
         console.log(response);
         //Change to navigate to user equipment page
-        navigate("/");
+        navigate("/my-listings");
       })
       .catch((error) => {
         console.log(error);
