@@ -9,6 +9,7 @@ import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
 import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
 import CreateComment from './pages/comments/CreateCommentPage';
+import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 
 function App() {
   const containerProps = {
@@ -28,6 +29,14 @@ function App() {
             <CreateComment />
           </PrivateRoute>
         }/>
+        <Route
+          path="/createEquipment"
+          element={
+            <PrivateRoute>
+              <CreateEquipment />
+            </PrivateRoute>
+          }
+        ></Route>
         
         <Route path="/my-listings" element={
           <PrivateRoute> 
@@ -41,7 +50,7 @@ function App() {
       </Routes>
     </Container>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,9 +1,18 @@
-import axios from 'axios';
-import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext.jsx'
-import { Flex, Title, Group, Text, Button, Burger, Menu, rem } from '@mantine/core';
-import CardGrid from '../../components/CardGrid.jsx';
+import axios from "axios";
+import { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
+import {
+  Flex,
+  Title,
+  Group,
+  Text,
+  Button,
+  Burger,
+  Menu,
+  rem,
+} from "@mantine/core";
+import CardGrid from "../../components/CardGrid.jsx";
 
 function UserListings() {
     const [equipments, setEquipments] = useState();
