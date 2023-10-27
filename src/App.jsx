@@ -8,6 +8,7 @@ import LoginPage from './pages/users/LogInPage';
 import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
 import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
+import CreateComment from './pages/comments/CreateCommentPage';
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 
 function App() {
@@ -21,6 +22,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage/ >}/>
         <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
+
+
+        <Route path="/createComment" element={
+          <PrivateRoute> 
+            <CreateComment />
+          </PrivateRoute>
+        }/>
         <Route
           path="/createEquipment"
           element={
