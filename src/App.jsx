@@ -1,7 +1,7 @@
 
 import '@mantine/core/styles.css';
-import { Container } from '@mantine/core';
 import Navbar from './components/Navbar';
+import { Container } from '@mantine/core';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import SignupPage from './pages/users/SignUpPage';

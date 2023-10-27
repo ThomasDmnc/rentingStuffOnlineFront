@@ -54,10 +54,8 @@ function Navbar() {
 
                 {isLoggedIn && (
                     <>
-                    <Button component={Link} to='/my-listings' variant="subtle" size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
-                    <Link>
-                        <Button variant="subtle" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
-                    </Link>
+                    <Button variant="subtle" component={Link} to='/my-listings'  size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
+                    <Button variant="subtle" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
                     
                     <Button variant="filled" color="#E01A4F" size="md" onClick={logOutUser}>Logout</Button>
                     </>
