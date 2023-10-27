@@ -10,7 +10,7 @@ import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
 
 import UserInformationPage from './pages/users/UserInformationPage';
 import EditUserInformationPage from './pages/users/EditUserInformationPage';
-import PrivateRoute from "./components/PrivateRoute";
+
 
 import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
