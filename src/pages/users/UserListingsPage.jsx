@@ -1,20 +1,27 @@
-import axios from 'axios';
-import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext.jsx'
-import { Flex, Title, Group, Text, Button, Burger, Menu, rem } from '@mantine/core';
-import CardGrid from '../../components/CardGrid.jsx';
+import axios from "axios";
+import { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
+import {
+  Flex,
+  Title,
+  Group,
+  Text,
+  Button,
+  Burger,
+  Menu,
+  rem,
+} from "@mantine/core";
+import CardGrid from "../../components/CardGrid.jsx";
 
 function UserListings() {
     const [equipments, setEquipments] = useState();
-    
     const { user } = useContext(AuthContext);
+    const [userId, setuserId] = useState(user.userId);
 
-      const [userId, setuserId] = useState(user.userId);
-
-      const getEquipments = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/api/equipments?OwnedBy=${userId}`)
-        .then((response) =>{
+    const getEquipments = () => {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/equipments?ownedBy=${userId}`)
+        .then((response) => {
             setEquipments(response.data)
         }).catch((error) => {
             console.log(error)
@@ -38,7 +45,7 @@ function UserListings() {
                     <Text mt="1rem">Manage all your equipments from here</Text>
                 </Flex>
             </Group>
-            { equipments ? (
+            { !equipments ? (
                 <Text mt="5vh">
                     You didn&apos;t add equipment yet…
                 </Text>
