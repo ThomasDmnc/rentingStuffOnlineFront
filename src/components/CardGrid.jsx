@@ -41,7 +41,7 @@ function CardGrid({ isUpdate, allEquipments }) {
                   <Flex direction="row" justify="space-evenly" align="center">
                     <Button
                       component={Link}
-                      to={`/equipments/${equipment._id}`}
+                      to={`/editEquipment/${equipment._id}`}
                       variant="filled"
                       color="#288BE2"
                       fullWidth

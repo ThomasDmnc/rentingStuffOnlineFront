@@ -1,3 +1,4 @@
+
 import '@mantine/core/styles.css';
 import { Container } from '@mantine/core';
 import Navbar from './components/Navbar';
@@ -10,11 +11,12 @@ import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
 import CreateComment from './pages/comments/CreateCommentPage';
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
+import EditEquipment from "./pages/equipments/EditEquipmentPage";
 
 function App() {
   const containerProps = {
-    h: '100vh'
-  }
+    h: "100vh",
+  };
   return (
     <> 
     <Navbar />
@@ -43,12 +45,29 @@ function App() {
             <UserListings />
           </PrivateRoute>
         }/>
-        
 
-        <Route path="/login" element={<LoginPage />}/>
-        <Route path="/signup" element={<SignupPage />}/>
-      </Routes>
-    </Container>
+          <Route
+            path="/editEquipment/:equipmentId"
+            element={
+              <PrivateRoute>
+                <EditEquipment />
+              </PrivateRoute>
+            }
+          ></Route>
+
+          <Route
+            path="/my-listings"
+            element={
+              <PrivateRoute>
+                <UserListings />
+              </PrivateRoute>
+            }
+          />
+
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+      </Container>
     </>
   );
 }
