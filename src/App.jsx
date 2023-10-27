@@ -1,3 +1,4 @@
+
 import '@mantine/core/styles.css';
 import { Container } from '@mantine/core';
 import Navbar from './components/Navbar';
@@ -6,24 +7,31 @@ import Homepage from './pages/Homepage';
 import SignupPage from './pages/users/SignUpPage';
 import LoginPage from './pages/users/LogInPage';
 import EquipmentDetails from './pages/equipments/EquipmentDetailsPage';
+
 import UserInformationPage from './pages/users/UserInformationPage';
 import EditUserInformationPage from './pages/users/EditUserInformationPage';
 import PrivateRoute from "./components/PrivateRoute";
 
+import UserListings from './pages/users/UserListingsPage';
+import PrivateRoute from './components/PrivateRoute';
+import CreateComment from './pages/comments/CreateCommentPage';
+import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
+import EditEquipment from "./pages/equipments/EditEquipmentPage";
+
+
 function App() {
   const containerProps = {
-    h: '100vh'
-  }
+    h: "100vh",
+  };
   return (
     <> 
     <Navbar />
     <Container {...containerProps}>
       <Routes>
         <Route path="/" element={<Homepage/ >}/>
-        <Route path="/login" element={<LoginPage />}/>
         <Route path='/equipments/:equipmentId' element={<EquipmentDetails />} />
-        <Route path="/signup" element={<SignupPage />}/>
-        <Route path="/profile" element=
+
+         <Route path="/profile" element=
         {<PrivateRoute>
         <UserInformationPage />
         </PrivateRoute> }/>
@@ -31,12 +39,53 @@ function App() {
         {<PrivateRoute>
         <EditUserInformationPage />
         </PrivateRoute> }/>
-       
 
-      </Routes>
-    </Container>
+
+        <Route path="/createComment" element={
+          <PrivateRoute> 
+            <CreateComment />
+          </PrivateRoute>
+        }/>
+        <Route
+          path="/createEquipment"
+          element={
+            <PrivateRoute>
+              <CreateEquipment />
+            </PrivateRoute>
+          }
+        ></Route>
+        
+        <Route path="/my-listings" element={
+          <PrivateRoute> 
+            <UserListings />
+          </PrivateRoute>
+        }/>
+
+          <Route
+            path="/editEquipment/:equipmentId"
+            element={
+              <PrivateRoute>
+                <EditEquipment />
+              </PrivateRoute>
+            }
+          ></Route>
+
+          <Route
+            path="/my-listings"
+            element={
+              <PrivateRoute>
+                <UserListings />
+              </PrivateRoute>
+            }
+          />
+
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+      </Container>
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;

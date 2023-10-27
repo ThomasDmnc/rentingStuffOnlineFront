@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Paper, TextInput, Button } from '@mantine/core';
+import { Container, Paper, TextInput, Button, rem } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -43,8 +43,8 @@ function SignupPage() {
   };
 
   return (
-    <Container size="xs">
-      <Paper padding="xl">
+    <Container  size="xs">
+      <Paper  bg="#F2F2F2" padding="xl">
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <TextInput
@@ -73,6 +73,7 @@ function SignupPage() {
             value={formData.password}
             onChange={handleInputChange}
           />
+
           <TextInput
             label="Image URL" // Update the label for the imgUrl field
             name="imgUrl"
@@ -82,6 +83,9 @@ function SignupPage() {
           <Button type="submit" variant="filled">
             Sign Up
           </Button>
+
+          
+
         </form>
       </Paper>
     </Container>
