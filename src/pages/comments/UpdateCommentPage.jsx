@@ -1,28 +1,41 @@
-import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../contexts/AuthContext.jsx";
-import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
+import { useParams, useNavigate } from "react-router-dom";
 
-function CreateComment() {
-  const { user } = useContext(AuthContext);
-
-  const [searchParams, setSearchParams] = useSearchParams();
+function UpdateComment() {
+  const { commentId } = useParams();
+  const [content, setContent] = useState();
+  const [createdBy, setCreatedBy] = useState();
   const [ownedBy, setOwnedBy] = useState();
-  const [content, setContent] = useState("");
-  const [rating, setRating] = useState(2.5);
-  const [createdBy, setcreatedBy] = useState(user.userId);
+  const [rating, setRating] = useState();
   const navigate = useNavigate();
+
+  const fetchCommentToUpdate = () => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/comments/${commentId}`)
+      .then((response) => {
+        setContent(response.data.content)
+        setCreatedBy(response.data.createdBy)
+        setOwnedBy(response.data.ownedBy)
+        setRating(response.data.rating)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
-    let queryOwner = searchParams.get("owner");
-    setOwnedBy(queryOwner);
-  });
+    fetchCommentToUpdate();
+  }, [commentId]);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = { content, rating, ownedBy, createdBy };
+    console.log(payload)
     axios
-      .post(`${import.meta.env.VITE_API_URL}/api/comments`, payload, {
+      .put(`${import.meta.env.VITE_API_URL}/api/comments/${commentId}`, payload, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": true,
@@ -40,7 +53,7 @@ function CreateComment() {
   return (
     <>
       <Title order={1} fw={900} c="#288BE2" size="52">
-        Add a new comment
+        Edit your comment
       </Title>
       <form onSubmit={handleSubmit}>
         <TextInput
@@ -61,4 +74,4 @@ function CreateComment() {
   );
 }
 
-export default CreateComment;
+export default UpdateComment;

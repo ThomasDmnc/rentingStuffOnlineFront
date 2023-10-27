@@ -10,6 +10,7 @@ import UserListings from './pages/users/UserListingsPage';
 import PrivateRoute from './components/PrivateRoute';
 import CreateComment from './pages/comments/CreateCommentPage';
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
+import UpdateComment from './pages/comments/UpdateCommentPage';
 
 function App() {
   const containerProps = {
@@ -29,6 +30,12 @@ function App() {
             <CreateComment />
           </PrivateRoute>
         }/>
+            <Route path="/updateComment/:commentId" element={
+          <PrivateRoute> 
+            <UpdateComment />
+          </PrivateRoute>
+        }/>
+
         <Route
           path="/createEquipment"
           element={
