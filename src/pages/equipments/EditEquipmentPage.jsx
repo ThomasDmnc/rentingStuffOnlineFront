@@ -13,33 +13,42 @@ import {
   Loader,
 } from "@mantine/core";
 
-import { AuthContext } from "../../contexts/AuthContext";
-import { useContext, useState } from "react";
-
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function EditEquipment() {
   const navigate = useNavigate();
 
-  const { user } = useContext(AuthContext);
   const { equipmentId } = useParams();
-  const [equipment, setEquipment] = useState({});
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [condition, setCondition] = useState("");
+  const [categories, setCategories] = useState();
 
   const [isLoading, setIsLoading] = useState(true);
-
-  const [imageUrl, setImageUrl] = useState();
 
   function uploadImage() {
     //Upload on cloudymoudy and set imageUrl to cloud Url
     console.log("Uploading image");
   }
 
+  useEffect(() => {
+    getEquipment();
+  }, []);
+
   function getEquipment() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
       .then((response) => {
-        setEquipment(response.data);
+        setName(response.data.name);
+        setDescription(response.data.description);
+        setCondition(response.data.condition);
+        setCategories(response.data.categories);
+        setImageUrl(response.data.imageUrl);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -56,12 +65,11 @@ function EditEquipment() {
       imageUrl,
       condition,
       categories,
-      ownedBy,
     };
     console.log(payload);
     axios
-      .post(
-        `${import.meta.env.VITE_API_URL}/api/equipments`,
+      .put(
+        `${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`,
         JSON.stringify(payload),
         {
           headers: {
@@ -93,7 +101,7 @@ function EditEquipment() {
       wrap="wrap"
     >
       <Title order={1} fw={900} c="#288BE2" size="52">
-        Add new Equipment
+        Update Equipment
       </Title>
       <form onSubmit={handleSubmit}>
         <Flex wrap="wrap" justify="center">
