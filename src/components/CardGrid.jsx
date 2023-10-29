@@ -19,13 +19,11 @@ function CardGrid({ isUpdate, allEquipments }) {
           return el != equipment;
         });
         setEquipments(newEquipments);
-        console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  console.log(equipments);
   return (
     <Grid gutter="lg" spacing="lg" mb={100}>
       {equipments &&

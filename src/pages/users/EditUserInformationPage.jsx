@@ -56,7 +56,7 @@ const EditUserInformationPage = () => {
 
   return (
     <Container size="sm">
-      <Paper padding="md">
+      <Paper bg="#F2F2F2" padding="md">
         <Grid gutter="md">
           <Grid.Col span={3}>
             {userData ? (

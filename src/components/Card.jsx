@@ -4,7 +4,6 @@ import { IconBoxSeam } from '@tabler/icons-react';
 
 function EquipmentCard(props) {
   const icon = <IconBoxSeam style={{ width: rem(12), height: rem(12) }} />;
-  console.log(props)
     return (
       <>
         <Card key={props.props._id} shadow="sm" padding="lg" radius="md" withBorder>

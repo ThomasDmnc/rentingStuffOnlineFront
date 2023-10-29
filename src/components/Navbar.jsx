@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext.jsx'
 
 import rlogo from '../assets/RLogoTemp.png'
+import UserBadge from './UserBadge.jsx';
   
 function Navbar() {
     const [opened, setOpened] = useState(false);
     const { 
         isLoggedIn,
-        logOutUser
+        logOutUser,
+        user
       } = useContext(AuthContext);
 
     const close = () => {
@@ -54,10 +56,10 @@ function Navbar() {
 
                 {isLoggedIn && (
                     <>
+                    
                     <Button variant="subtle" color="#288BE2" component={Link} to='/my-listings'  size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
                     <Button variant="subtle" color="#288BE2" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
-                    
-                    <Button variant="filled" color="#E01A4F" size="md" onClick={logOutUser}>Logout</Button>
+                    <UserBadge size="md"  userProps={user}/>
                     </>
                 )}   
                 
