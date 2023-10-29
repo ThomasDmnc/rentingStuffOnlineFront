@@ -27,13 +27,13 @@ function CardGrid({ isUpdate, allEquipments }) {
   };
   console.log(equipments);
   return (
-    <Grid gutter="lg" spacing="lg">
+    <Grid gutter="lg" spacing="lg" mb={100}>
       {equipments &&
         equipments.map((equipment) => {
           return (
             <Grid.Col
               key={equipment.id}
-              span={{ base: 12, xs: 6, md: 3, lg: 3 }}
+              span={{ base: 12, xs: 6, md: 4, lg: 4 }}
             >
               <EquipmentCard props={equipment} />
               {isUpdate ? (

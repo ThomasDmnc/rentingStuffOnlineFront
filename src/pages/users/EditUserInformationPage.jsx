@@ -30,6 +30,7 @@ const EditUserInformationPage = () => {
     
     const formData = new FormData();
     formData.append('imageUrl', file);
+    console.log(file)
     formData.append('firstName', userData.firstName);
     formData.append('lastName', userData.lastName);
     formData.append('email', userData.email);
