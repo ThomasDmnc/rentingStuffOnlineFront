@@ -1,12 +1,11 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
-import { Rating, TextInput, Text, Button , Title, rem} from "@mantine/core";
+import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CreateComment() {
   const { user } = useContext(AuthContext);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [ownedBy, setOwnedBy] = useState();
   const [content, setContent] = useState("");
