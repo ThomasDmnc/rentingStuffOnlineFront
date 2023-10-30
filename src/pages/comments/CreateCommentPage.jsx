@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
-import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
+import { Rating, TextInput, Text, Button , Title, rem} from "@mantine/core";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -39,7 +39,7 @@ function CreateComment() {
 
   return (
     <>
-      <Title order={1} fw={900} c="#288BE2" size="52">
+      <Title order={1} fw={900} c="#288BE2" size="52" mt="5rem" mb="5rem">
         Add a new comment
       </Title>
       <form onSubmit={handleSubmit}>
@@ -47,12 +47,14 @@ function CreateComment() {
           label="Your comment:"
           placeholder="Please write your comment here."
           value={content}
+          mb="1rem"
           onChange={(event) => setContent(event.currentTarget.value)}
         />
         <Text>Your rating:</Text>
         <Rating
           fractions={2}
           value={rating}
+          mb="1rem"
           onChange={(event) => setRating(event)}
         />
         <Button type="submit">Create your comment</Button>
