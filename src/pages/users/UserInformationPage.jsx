@@ -23,7 +23,7 @@ function UserInformationPage() {
   return (
 
     <Container size="sm">
-      <Paper padding="md">
+      <Paper bg="#F2F2F2"  padding="md">
         <Grid gutter="md">
           <Grid.Col span={3}>
             <Image src={userData?.imageUrl || '../src/assets/defaultAvatar.png'} width={150} height={150} alt={`${userData?.firstName || ''} ${userData?.Lastname || ''}`} />

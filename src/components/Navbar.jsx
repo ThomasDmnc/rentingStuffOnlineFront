@@ -1,16 +1,18 @@
 import { Flex, Button, Burger, Menu, rem } from '@mantine/core';
-import { IconUserEdit, IconUserBolt, IconTools, IconInbox } from '@tabler/icons-react';
+import { IconUserEdit, IconUserBolt, IconTools, IconInbox, IconSettings, IconLogout } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext.jsx'
 
 import rlogo from '../assets/RLogoTemp.png'
+import UserBadge from './UserBadge.jsx';
   
 function Navbar() {
     const [opened, setOpened] = useState(false);
     const { 
         isLoggedIn,
-        logOutUser
+        logOutUser,
+        user
       } = useContext(AuthContext);
 
     const close = () => {
@@ -54,10 +56,10 @@ function Navbar() {
 
                 {isLoggedIn && (
                     <>
+                    
                     <Button variant="subtle" color="#288BE2" component={Link} to='/my-listings'  size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
                     <Button variant="subtle" color="#288BE2" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
-                    
-                    <Button variant="filled" color="#E01A4F" size="md" onClick={logOutUser}>Logout</Button>
+                    <UserBadge size="md" userProps={user}/>
                     </>
                 )}   
                 
@@ -86,8 +88,11 @@ function Navbar() {
                             <Menu.Item component={Link} to={`/`} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
                             My Requests
                             </Menu.Item>
+                            <Menu.Item component={Link} to='/profile' leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
+                            Account Settings
+                            </Menu.Item>
                             <Menu.Divider />
-                        <Menu.Item onClick={logOutUser} leftSection={<IconUserEdit style={{ width: rem(14), height: rem(14) }} />}> 
+                        <Menu.Item onClick={logOutUser} leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}> 
                         Log Out
                         </Menu.Item>
                     </>

@@ -30,6 +30,7 @@ const EditUserInformationPage = () => {
     
     const formData = new FormData();
     formData.append('imageUrl', file);
+    console.log(file)
     formData.append('firstName', userData.firstName);
     formData.append('lastName', userData.lastName);
     formData.append('email', userData.email);
@@ -55,7 +56,7 @@ const EditUserInformationPage = () => {
 
   return (
     <Container size="sm">
-      <Paper padding="md">
+      <Paper bg="#F2F2F2" padding="md">
         <Grid gutter="md">
           <Grid.Col span={3}>
             {userData ? (
