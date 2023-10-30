@@ -10,8 +10,9 @@ function Comment({ theComment }) {
       <Flex w="100%"  mt={20} mb={20} 
         direction={{ base: 'column', sm: 'row' }}
         gap={{ base: 'sm', sm: 'lg' }}
+        justify={{ sm: 'center' }}
       >
-        <Flex justify={{ base: 'center', sm: 'center' }} align="center" mr={20} w="30%">
+        <Flex w={{ sm: "100%", md:"30%", lg:"30%" }} justify={{ md: 'center', sm: 'center' }} align="center" mr={20} >
           <Avatar h={50} w={50} src={comment.createdBy.imageUrl} mr={10} />
           <Text fw={600}>
             {comment.createdBy.firstName} {comment.createdBy.lastName}
