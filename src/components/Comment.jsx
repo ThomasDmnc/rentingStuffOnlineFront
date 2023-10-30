@@ -11,7 +11,7 @@ function Comment({ theComment }) {
         direction={{ base: 'column', sm: 'row' }}
         gap={{ base: 'sm', sm: 'lg' }}
       >
-        <Flex justify={{ base: 'center', sm: 'center' }} align="center" mr={20}>
+        <Flex justify={{ base: 'center', sm: 'center' }} align="center" mr={20} w="30%">
           <Avatar h={50} w={50} src={comment.createdBy.imageUrl} mr={10} />
           <Text fw={600}>
             {comment.createdBy.firstName} {comment.createdBy.lastName}
