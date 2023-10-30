@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import 'dayjs/locale/de';
 import Navbar from "./components/Navbar";
 import { Container } from "@mantine/core";
 import { Routes, Route } from "react-router-dom";
@@ -15,6 +16,7 @@ import UpdateComment from "./pages/comments/UpdateCommentPage";
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 import EditEquipment from "./pages/equipments/EditEquipmentPage";
 import NotFoundPage from './pages/NotFoundPage';
+import CreateRequest from "./pages/requests/CreateRequestPage";
 
 
 function App() {
@@ -77,15 +79,6 @@ function App() {
           ></Route>
 
           <Route
-            path="/my-listings"
-            element={
-              <PrivateRoute>
-                <UserListings />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
             path="/editEquipment/:equipmentId"
             element={
               <PrivateRoute>
@@ -100,6 +93,15 @@ function App() {
               <PrivateRoute>
                 <UserListings />
               </PrivateRoute>
+            }
+          />
+
+          <Route 
+            path="/createRequest"
+            element={
+                <PrivateRoute>
+                  <CreateRequest />
+                </PrivateRoute>
             }
           />
 
