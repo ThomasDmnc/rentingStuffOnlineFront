@@ -22,7 +22,9 @@ function EditEquipment() {
 
   const { equipmentId } = useParams();
 
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(
+    "https://res.cloudinary.com/dq06ojue1/image/upload/v1698659751/trsfpj0z9irvccspskqu.jpg"
+  );
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
