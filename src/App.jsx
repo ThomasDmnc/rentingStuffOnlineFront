@@ -14,6 +14,8 @@ import CreateComment from "./pages/comments/CreateCommentPage";
 import UpdateComment from "./pages/comments/UpdateCommentPage";
 import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 import EditEquipment from "./pages/equipments/EditEquipmentPage";
+import NotFoundPage from './pages/NotFoundPage';
+
 
 function App() {
   const containerProps = {
@@ -103,6 +105,7 @@ function App() {
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </Container>
     </>
