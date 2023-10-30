@@ -38,7 +38,7 @@ function CommentGrid({ allcomments }) {
                     <Grid.Col key={comment._id} span={{ base: 12, xs:12, md: 12, lg: 12}}>
                         <Flex w='100%'>
                         <Comment theComment={comment} />
-                        { user.userId === comment.createdBy._id ? (
+                        { user && user.userId === comment.createdBy._id ? (
                             <Flex
                             direction="column"
                             align="center"
