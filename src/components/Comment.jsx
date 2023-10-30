@@ -18,7 +18,7 @@ function Comment({ theComment }) {
           </Text>
         </Flex>
         <Flex w="100%" direction="column" justify="space-between" mr={10}>
-          <Rating value={comment.rating} />
+          <Rating readOnly value={comment.rating} />
           <Text mt={20}>{comment.content}</Text>
         </Flex>
       </Flex>
