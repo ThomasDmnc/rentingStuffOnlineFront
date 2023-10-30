@@ -9,6 +9,7 @@ function UserBadge({userProps}) {
     const [user, setUser] = useState(userProps);
     const [userInfo, setUserInfo] = useState();
     const [opened, setOpened] = useState(false);
+    
     const {
         logOutUser,
       } = useContext(AuthContext);

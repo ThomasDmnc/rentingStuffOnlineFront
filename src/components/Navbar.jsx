@@ -59,7 +59,7 @@ function Navbar() {
                     
                     <Button variant="subtle" color="#288BE2" component={Link} to='/my-listings'  size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
                     <Button variant="subtle" color="#288BE2" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
-                    <UserBadge size="md"  userProps={user}/>
+                    <UserBadge size="md" userProps={user}/>
                     </>
                 )}   
                 
