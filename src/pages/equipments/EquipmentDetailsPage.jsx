@@ -83,9 +83,9 @@ function EquipmentDetails() {
           justify="space-evenly"
           mih="30rem"
         >
-          <Title order={1} fw={900} c="#288BE2" size="48">
-            {equipment.name}
-          </Title>
+            <Title order={1} fw={900} c="#288BE2" size="calc(1.5rem * var(--mantine-scale))">
+              {equipment.name}
+            </Title>
           <Badge
             leftSection={icon}
             variant="light"

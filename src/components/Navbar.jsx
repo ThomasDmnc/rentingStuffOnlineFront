@@ -1,5 +1,5 @@
 import { Flex, Button, Burger, Menu, rem } from '@mantine/core';
-import { IconUserEdit, IconUserBolt, IconTools, IconInbox } from '@tabler/icons-react';
+import { IconUserEdit, IconUserBolt, IconTools, IconInbox, IconSettings, IconLogout } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext.jsx'
@@ -88,8 +88,11 @@ function Navbar() {
                             <Menu.Item component={Link} to={`/`} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
                             My Requests
                             </Menu.Item>
+                            <Menu.Item component={Link} to='/profile' leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
+                            Account Settings
+                            </Menu.Item>
                             <Menu.Divider />
-                        <Menu.Item onClick={logOutUser} leftSection={<IconUserEdit style={{ width: rem(14), height: rem(14) }} />}> 
+                        <Menu.Item onClick={logOutUser} leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}> 
                         Log Out
                         </Menu.Item>
                     </>
