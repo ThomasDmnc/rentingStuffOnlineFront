@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Paper, Image, Grid, TextInput, Button } from '@mantine/core';
+import { Container, Paper, Image, Grid, TextInput, Button, Flex } from '@mantine/core';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const EditUserInformationPage = () => {
@@ -27,10 +27,8 @@ const EditUserInformationPage = () => {
   };
 
   const handleSaveChanges = () => {
-    
     const formData = new FormData();
     formData.append('imageUrl', file);
-    console.log(file)
     formData.append('firstName', userData.firstName);
     formData.append('lastName', userData.lastName);
     formData.append('email', userData.email);
@@ -51,28 +49,26 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-  
-  
-
   return (
     <Container size="sm">
       <Paper bg="#F2F2F2" padding="md">
-        <Grid gutter="md">
-          <Grid.Col span={3}>
-            {userData ? (
-              <div>
+      <Flex direction={{ xs: 'column', sm: 'row' }} align={{ xs: 'center', sm: 'start' }} gap="md">
+          <Flex direction="column" align="center" justify="center">
+            {userData && (
+              <div style={{ marginBottom: '10px' }}>
                 <Image
                   src={userData.imageUrl}
                   width={150}
                   height={150}
                   alt={`${userData.firstName} ${userData.lastName}`}
+
                 />
-                <input type="file" accept="image/*" onChange={handleUpdateImage} />
-                 
               </div>
-            ) : null}
-          </Grid.Col>
-          <Grid.Col span={9}>
+            )}
+          
+            <input type="file" accept="image/*" onChange={handleUpdateImage} />
+          </Flex>
+          <Flex direction="column" gap="md">
             <TextInput
               name="firstName"
               label="First Name"
@@ -94,8 +90,8 @@ const EditUserInformationPage = () => {
             <Button variant="filled" onClick={handleSaveChanges}>
               Save Changes
             </Button>
-          </Grid.Col>
-        </Grid>
+          </Flex>
+        </Flex>
       </Paper>
     </Container>
   );
