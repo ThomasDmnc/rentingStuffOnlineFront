@@ -127,7 +127,7 @@ function EquipmentDetails() {
       </section>
       <section>
         <Title mt={20} order={3} fw={900} c="#F9C22E">
-          Comments:
+          Comments about the owner:
         </Title>
         {comments.length == 0 ? (
           <>

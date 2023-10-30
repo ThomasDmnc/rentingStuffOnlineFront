@@ -68,7 +68,7 @@ function UpdateComment() {
           value={rating}
           onChange={(event) => setRating(event)}
         />
-        <Button type="submit">Create your comment</Button>
+        <Button type="submit">Update your comment</Button>
       </form>
     </>
   );
