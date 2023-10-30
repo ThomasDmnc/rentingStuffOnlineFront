@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container, Paper, Text, Button } from '@mantine/core';
+import { Container, Paper, Text, Button, rem } from '@mantine/core';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const NotFoundPage = () => {
 
   return (
     <Container size="xs" style={{ height: '100vh' }}>
-      <Paper padding="lg" shadow="xs" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+      <Paper bg="#F2F2F2" padding="lg" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <Text size="xl" weight={700}>
           404 - Not Found
         </Text>
@@ -33,8 +33,8 @@ const NotFoundPage = () => {
         <Text size="md">
           You will be redirected to the home page in {countdown} seconds.
         </Text>
-        <Link to="/">
-          <Button variant="light">Go to Home</Button>
+        <Link mt="2rem" to="/">
+          <Button mt="2rem" variant="light">Go to Home</Button>
         </Link>
       </Paper>
     </Container>
