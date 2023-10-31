@@ -22,7 +22,7 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
     useEffect(() =>{
         setRequests(allReceivedRequests)
     }, [allReceivedRequests]) 
-    
+
   return (
     <>
       { requests && requests.map((request) => {
@@ -79,7 +79,10 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                       )}
                     </Flex>
                   </Grid.Col>
-                    <RequestOwnerForm requestData={request}  yetAnotherMagicFunction={magicFunction} />
+                  {request.status === "pending" ? (<RequestOwnerForm requestData={request}  yetAnotherMagicFunction={magicFunction} />) : null }
+                  <Grid.Col>
+                  {request.status === "accepted" ? (<Button>Make your equipment availabe again</Button>) : null }
+                  </Grid.Col>
                 </Grid>
               </Flex>
             </Flex>

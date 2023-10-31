@@ -2,10 +2,6 @@ import "dayjs/locale/de";
 import "@mantine/dates/styles.css";
 import {
   Grid,
-  Flex,
-  Text,
-  Badge,
-  Image,
   Button,
   Title,
   Radio,
@@ -14,13 +10,11 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
     const [request, setRequest] = useState(requestData);
     const [acceptation, setAcceptation] = useState("");
     const [answer, setAnswer] = useState("");
-
 
     const handleSubmit = () => {
         event.preventDefault()
@@ -30,17 +24,38 @@ function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
             responseMessage,
             status
         }
+
+        if (status === "accepted") {
+            updateAvailability()
+        }
+
         axios.put(`${import.meta.env.VITE_API_URL}/api/requests/${request._id}`, payload, {
             headers: {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": true,
             },})
-        .then((response) => {
-            console.log(response)
+        .then(() => {
             yetAnotherMagicFunction()
         }).catch((error) => {
             console.log(error)
         })
+    }
+
+    const updateAvailability = () =>{
+        const equipmmentId = request.equipmentId._id
+        const available = false;
+        const payload = {available}
+        axios.put(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmmentId}`, payload, {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": true,
+            },})
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) =>{
+                console.log(error)
+             })
     }
 
   return (
