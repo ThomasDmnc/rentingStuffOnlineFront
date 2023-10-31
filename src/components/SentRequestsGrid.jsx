@@ -1,21 +1,28 @@
 import "dayjs/locale/de";
 import "@mantine/dates/styles.css";
 import { Grid, Flex, Text, Badge, Image, Button } from "@mantine/core";
-import { useState } from "react";
-import { DatesProvider, DateTimePicker, DateInput } from "@mantine/dates";
+import { useState, useEffect } from "react";
+import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 function SentRequestsGrid({ allSentRequests }) {
   const [requests, setRequests] = useState(allSentRequests);
   
+    useEffect(() =>{
+      setRequests(allSentRequests)
+  }, [allSentRequests]) 
+
   const handleDeleteRequest = (requestId) => {
     axios.delete(`${import.meta.env.VITE_API_URL}/api/requests/${requestId}`)
     .then(() =>{
-        console.log("It was well destroyed")
+      const newRequests = requests.filter(function (request) {
+        return request._id != requestId;
+      })
+      setRequests(newRequests);
     })
     .catch((err) => {
-        console.log(err)
+      console.log(err)
     })
   }
 
@@ -69,7 +76,7 @@ function SentRequestsGrid({ allSentRequests }) {
                       </Badge>
                     </Text>
 
-                    <Text>Response from the ownwer:</Text>
+                    <Text>Response from the owner:</Text>
                     {!request.responseMessage ? (
                       <Text>No response yet.</Text>
                     ) : (

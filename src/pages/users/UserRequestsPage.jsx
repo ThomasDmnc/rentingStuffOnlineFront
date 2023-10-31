@@ -3,6 +3,7 @@ import { Title, Grid, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SentRequestsGrid from "../../components/SentRequestsGrid";
+import ReceivedRequestsGrid from "../../components/ReceivedRequestsGrid";
 
 
 function UserRequests() {
@@ -11,7 +12,6 @@ function UserRequests() {
     const [userId, setUserId] = useState(user.userId);
     const [sentRequests, setSentRequests] = useState();
     const [receivedRequests, setReceivedRequests] = useState();
-    
 
     const fetchAllSentRequests = () => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/requests?requesterId=${userId}`)
@@ -32,9 +32,14 @@ function UserRequests() {
             console.log(err)
         })
     }
-    useEffect(() => {
+
+    const fetchAllRequests = () => {
         fetchAllSentRequests();
         fetchAllReceivedRequests();
+    }
+
+    useEffect(() => {
+        fetchAllRequests();
     }, [])
 
   return (
@@ -74,7 +79,7 @@ function UserRequests() {
             </Grid.Col>
         ):(
             <Grid.Col>
-                <Text>olé</Text>
+                <ReceivedRequestsGrid allReceivedRequests={receivedRequests} magicFunction={fetchAllRequests}/>
             </Grid.Col>
         )}
       </Grid>

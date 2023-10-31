@@ -68,7 +68,7 @@ function CreateRequest() {
             setDates(event);
           }}
         />
-        <Button type="submit">Create your comment</Button>
+        <Button type="submit">Send your request</Button>
       </form>
     </>
   );
