@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { DateInput } from "@mantine/dates";
 import RequestOwnerForm from "./RequestOwnerForm";
+import axios from "axios";
 
 function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
     const [requests, setRequests] = useState();
@@ -22,6 +23,25 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
     useEffect(() =>{
         setRequests(allReceivedRequests)
     }, [allReceivedRequests]) 
+
+    const updateAvailability = (id) =>{
+      const equipmmentId = id
+      const available = true;
+      const payload = {available}
+      axios.put(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmmentId}`, payload, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": true,
+          },})
+          .then((response) => {
+              console.log(response)
+          })
+          .catch((error) =>{
+              console.log(error)
+           })
+  }
+
+  
 
   return (
     <>
@@ -81,7 +101,7 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                   </Grid.Col>
                   {request.status === "pending" ? (<RequestOwnerForm requestData={request}  yetAnotherMagicFunction={magicFunction} />) : null }
                   <Grid.Col>
-                  {request.status === "accepted" ? (<Button>Make your equipment availabe again</Button>) : null }
+                  {request.status === "accepted" ? (<Button onClick={() => updateAvailability(request.equipmentId._id)}>Make your equipment availabe again</Button>) : null }
                   </Grid.Col>
                 </Grid>
               </Flex>
