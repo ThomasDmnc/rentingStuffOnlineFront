@@ -11,27 +11,57 @@ import {
   Select,
   FileInput,
   Loader,
+  rem,
+  Notification,
 } from "@mantine/core";
+
+import { IconX } from "@tabler/icons-react";
 
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useForm } from "@mantine/form";
 
 function EditEquipment() {
   const navigate = useNavigate();
 
+  const defaultImageUrl =
+    "https://res.cloudinary.com/dq06ojue1/image/upload/v1698659751/trsfpj0z9irvccspskqu.jpg";
+
   const { equipmentId } = useParams();
 
-  const [imageUrl, setImageUrl] = useState("");
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [condition, setCondition] = useState("");
-  const [categories, setCategories] = useState();
-
-  const [file, setFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState(defaultImageUrl);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const newForm = useForm({
+    initialValues: {
+      name: "",
+      description: "",
+      condition: "",
+      categories: [],
+    },
+    validate: {
+      name: (value) =>
+        value.length < 3 ? "Name has to be at least 3 characters" : null,
+      description: (value) =>
+        value.length > 0 && (value.length < 20 || value.length > 150)
+          ? "Description needs to be between 20-150 characters"
+          : null,
+      condition: (value) => (value.length < 1 ? "Choose a condition" : null),
+
+      categories: (value) =>
+        value.length < 1 ? "Pick at least one categroy" : null,
+    },
+  });
+
+  const xIcon = <IconX style={{ width: rem(20), height: rem(20) }} />;
+  const [file, setFile] = useState();
+  const [fileUploaded, setFileUploaded] = useState(true);
+
+  useEffect(() => {
+    setFileUploaded(false);
+  }, [file]);
 
   function uploadImage() {
     const formData = new FormData();
@@ -42,12 +72,19 @@ function EditEquipment() {
       .then((response) => {
         console.log(response);
         setImageUrl(response.data.file);
+        setFileUploaded(true);
       })
       .catch((error) => {
         console.log(error.response.data.message);
       });
 
     console.log("Uploading image");
+  }
+
+  function removeImage() {
+    setImageUrl(defaultImageUrl);
+    setFile(null);
+    setFileUploaded(true);
   }
 
   useEffect(() => {
@@ -58,11 +95,13 @@ function EditEquipment() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
       .then((response) => {
-        setName(response.data.name);
-        setDescription(response.data.description);
-        setCondition(response.data.condition);
-        setCategories(response.data.categories);
         setImageUrl(response.data.imageUrl);
+        newForm.setValues({
+          name: response.data.name,
+          description: response.data.description,
+          condition: response.data.condition,
+          categories: response.data.categories,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
@@ -72,33 +111,41 @@ function EditEquipment() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    const payload = {
-      name,
-      description,
-      imageUrl,
-      condition,
-      categories,
-    };
-    console.log(payload);
-    axios
-      .put(
-        `${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`,
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": true,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        navigate(`/equipments/${equipmentId}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (newForm.isValid() && ((fileUploaded && file) || !file)) {
+      const name = newForm.getInputProps("name").value;
+      const description = newForm.getInputProps("description").value;
+      const condition = newForm.getInputProps("condition").value;
+      const categories = newForm.getInputProps("categories").value;
+      const payload = {
+        name,
+        description,
+        condition,
+        categories,
+        imageUrl,
+      };
+      console.log(payload);
+      axios
+        .put(
+          `${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`,
+          JSON.stringify(payload),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": true,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          navigate(`/equipments/${equipmentId}`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      newForm.validate();
+      console.log(newForm.errors);
+    }
   }
 
   return isLoading ? (
@@ -121,15 +168,28 @@ function EditEquipment() {
         <Flex wrap="wrap" justify="center">
           <Card>
             <Card.Section>
-              <Image src={imageUrl} w="10em" h="10em" radius="md" />
+              <Image src={imageUrl} h="10em" radius="md" fit="fill" />
               <FileInput
                 label="Equipment image"
                 placeholder="Enter Image Url"
                 value={file}
                 onChange={setFile}
               />
-              <Button variant="filled" onClick={uploadImage}>
+              <Button
+                variant="filled"
+                onClick={() => {
+                  uploadImage();
+                }}
+              >
                 Upload
+              </Button>
+              <Button
+                variant="filled"
+                onClick={() => {
+                  removeImage();
+                }}
+              >
+                Remove
               </Button>
             </Card.Section>
           </Card>
@@ -137,26 +197,19 @@ function EditEquipment() {
             <TextInput
               label="Name"
               placeholder="Enter Equipment name"
-              value={name}
-              onChange={(event) => {
-                setName(event.currentTarget.value);
-              }}
+              {...newForm.getInputProps("name")}
             />
             <Textarea
               label="description"
               placeholder="Enter Equipment description"
-              value={description}
-              onChange={(event) => {
-                setDescription(event.currentTarget.value);
-              }}
+              {...newForm.getInputProps("description")}
             />
             <Flex wrap={"wrap"}>
               <Select
                 label="Condition"
                 placeholder="Choose condition"
                 data={["poor", "used", "good", "new"]}
-                value={condition}
-                onChange={setCondition}
+                {...newForm.getInputProps("condition")}
               />
               <MultiSelect
                 label="Categories"
@@ -169,12 +222,21 @@ function EditEquipment() {
                   "Biking",
                   "Skiing",
                 ]}
-                value={categories}
-                onChange={setCategories}
+                {...newForm.getInputProps("categories")}
                 hidePickedOptions
                 searchable
               />
             </Flex>
+            {file && !fileUploaded && (
+              <Notification
+                icon={xIcon}
+                color="red"
+                title="Stop!"
+                withCloseButton={false}
+              >
+                Please upload picture before submitting
+              </Notification>
+            )}
             <Button type="submit">Update Equipment</Button>
           </Container>
         </Flex>
