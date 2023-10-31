@@ -6,7 +6,6 @@ import axios from "axios";
 
 function CreateComment() {
   const { user } = useContext(AuthContext);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [ownedBy, setOwnedBy] = useState();
   const [content, setContent] = useState("");
@@ -39,7 +38,7 @@ function CreateComment() {
 
   return (
     <>
-      <Title order={1} fw={900} c="#288BE2" size="52">
+      <Title order={1} fw={900} c="#288BE2" size="52" mt="5rem" mb="5rem">
         Add a new comment
       </Title>
       <form onSubmit={handleSubmit}>
@@ -47,12 +46,14 @@ function CreateComment() {
           label="Your comment:"
           placeholder="Please write your comment here."
           value={content}
+          mb="1rem"
           onChange={(event) => setContent(event.currentTarget.value)}
         />
         <Text>Your rating:</Text>
         <Rating
           fractions={2}
           value={rating}
+          mb="1rem"
           onChange={(event) => setRating(event)}
         />
         <Button type="submit">Create your comment</Button>

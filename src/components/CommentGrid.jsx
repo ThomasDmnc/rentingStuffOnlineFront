@@ -36,9 +36,9 @@ function CommentGrid({ allcomments }) {
             { typeof comments === 'object' && comments.length > 0 && comments.map((comment) => {
                 return(
                     <Grid.Col key={comment._id} span={{ base: 12, xs:12, md: 12, lg: 12}}>
-                        <Flex w='100%'>
+                        <Flex w='100%' direction={{ base: 'column', sm: 'row' }}>
                         <Comment theComment={comment} />
-                        { user.userId === comment.createdBy._id ? (
+                        { user && user.userId === comment.createdBy._id ? (
                             <Flex
                             direction="column"
                             align="center"

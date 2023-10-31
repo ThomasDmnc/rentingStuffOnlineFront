@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
+import { Rating, TextInput, Text, Button , Title, rem} from "@mantine/core";
 import { useParams, useNavigate } from "react-router-dom";
 
 function UpdateComment() {
@@ -52,7 +52,7 @@ function UpdateComment() {
 
   return (
     <>
-      <Title order={1} fw={900} c="#288BE2" size="52">
+      <Title order={1} fw={900} c="#288BE2" size="52" mt="5rem" mb="5rem">
         Edit your comment
       </Title>
       <form onSubmit={handleSubmit}>
@@ -60,6 +60,7 @@ function UpdateComment() {
           label="Your comment:"
           placeholder="Please write your comment here."
           value={content}
+          mb="1rem"
           onChange={(event) => setContent(event.currentTarget.value)}
         />
         <Text>Your rating:</Text>
@@ -67,8 +68,9 @@ function UpdateComment() {
           fractions={2}
           value={rating}
           onChange={(event) => setRating(event)}
+          mb="1rem"
         />
-        <Button type="submit">Create your comment</Button>
+        <Button type="submit">Update your comment</Button>
       </form>
     </>
   );
