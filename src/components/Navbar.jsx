@@ -85,7 +85,7 @@ function Navbar() {
                             <Menu.Item component={Link} to='/my-listings' leftSection={<IconTools style={{ width: rem(14), height: rem(14) }} />}>
                             My Equipments
                             </Menu.Item>
-                            <Menu.Item component={Link} to={`/`} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
+                            <Menu.Item component={Link} state={{user: user}}  to={'/my-requests'} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
                             My Requests
                             </Menu.Item>
                             <Menu.Item component={Link} to='/profile' leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>

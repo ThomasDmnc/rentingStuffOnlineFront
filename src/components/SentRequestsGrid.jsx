@@ -8,14 +8,17 @@ import axios from "axios";
 
 function SentRequestsGrid({ allSentRequests }) {
   const [requests, setRequests] = useState(allSentRequests);
-  
+  console.log(requests)
   const handleDeleteRequest = (requestId) => {
     axios.delete(`${import.meta.env.VITE_API_URL}/api/requests/${requestId}`)
     .then(() =>{
-        console.log("It was well destroyed")
+      const newRequests = requests.filter(function (request) {
+        return request._id != requestId;
+      })
+      setRequests(newRequests);
     })
     .catch((err) => {
-        console.log(err)
+      console.log(err)
     })
   }
 
