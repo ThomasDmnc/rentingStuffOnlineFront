@@ -22,7 +22,7 @@ function EquipmentDetails() {
   const { equipmentId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const icon = <IconBoxSeam style={{ width: rem(12), height: rem(12) }} />;
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [owner, setOwner] = useState({});
   const [comments, setComments] = useState({});
 
@@ -102,7 +102,7 @@ function EquipmentDetails() {
           <Text>{equipment.description}</Text>
           <Text>{equipment.available}</Text>
 
-          <Button mt={20} variant="filled" color="#288BE2" size="md">
+          <Button component={Link} to='/createRequest' state={{ equipment: equipment, owner: equipment.ownedBy, requester:  user.userId}} mt={20} variant="filled" color="#288BE2" size="md">
             Make a request
           </Button>
         </Flex>
