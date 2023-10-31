@@ -57,7 +57,7 @@ function CreateEquipment() {
 
   const xIcon = <IconX style={{ width: rem(20), height: rem(20) }} />;
   const [file, setFile] = useState(null);
-  const [fileUploaded, setFileUploaded] = useState(false);
+  const [fileUploaded, setFileUploaded] = useState(true);
 
   useEffect(() => {
     setFileUploaded(false);
@@ -89,7 +89,7 @@ function CreateEquipment() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (newForm.isValid() && fileUploaded) {
+    if (newForm.isValid() && ((fileUploaded && file) || !file)) {
       const name = newForm.getInputProps("name").value;
       const description = newForm.getInputProps("description").value;
       const condition = newForm.getInputProps("condition").value;
@@ -138,7 +138,7 @@ function CreateEquipment() {
         Add new Equipment
       </Title>
       <form onSubmit={handleSubmit}>
-        <Flex wrap="wrap" justify="center">
+        <Flex wrap="wrap" justify="center" align="space-between">
           <Card>
             <Card.Section>
               <Image src={imageUrl} radius="md" fit="contain" h="5rem" />
@@ -197,12 +197,17 @@ function CreateEquipment() {
                 searchable
               />
             </Flex>
-            <Button type="submit">Add Equipment</Button>
             {file && !fileUploaded && (
-              <Notification icon={xIcon} color="red" title="Stop!">
+              <Notification
+                icon={xIcon}
+                color="red"
+                title="Stop!"
+                withCloseButton={false}
+              >
                 Please upload picture before submitting
               </Notification>
             )}
+            <Button type="submit">Add Equipment</Button>
           </Container>
         </Flex>
       </form>
