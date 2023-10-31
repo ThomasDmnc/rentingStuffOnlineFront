@@ -19,7 +19,8 @@ import axios from "axios";
 import { IconX } from "@tabler/icons-react";
 
 function SignupPage() {
-  const defaultPorfileUrl = "./src/assets/defaultAvatar.png";
+  const defaultPorfileUrl =
+    "https://res.cloudinary.com/dq06ojue1/image/upload/v1698767929/d9r3dmbpbov77j75rqz0.png";
 
   const [file, setFile] = useState(null);
   const [fileUploaded, setFileUploaded] = useState(true);
@@ -90,9 +91,8 @@ function SignupPage() {
     axios
       .put(`${import.meta.env.VITE_API_URL}/auth/upload`, formData)
       .then((response) => {
-        console.log(response);
         newForm.setFieldValue("imgUrl", response.data.file);
-        // setFileUploaded(true);
+        setFileUploaded(true);
       })
       .catch((error) => {
         console.log(error.response.data.message);
