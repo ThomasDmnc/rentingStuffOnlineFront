@@ -47,7 +47,7 @@ function CreateRequest() {
   return (
     <>
       <Title order={1} fw={900} c="#288BE2" size="52" mt="5rem" mb="5rem">
-        Add a new comment
+        Create your request
       </Title>
       <form onSubmit={handleSubmit}>
         <TextInput

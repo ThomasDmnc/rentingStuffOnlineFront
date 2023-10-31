@@ -79,8 +79,8 @@ function SentRequestsGrid({ allSentRequests }) {
                   </Grid.Col>
                   <Grid.Col span={2}>
                   <Flex direction="column">
-                    <Button component={Link} to='/' >Edit your request</Button>
-                    <Button onClick={() => handleDeleteRequest(request._id)}>Delete your request</Button>
+                    <Button component={Link} state={{request: request}} to='/editRequest' >Edit</Button>
+                    <Button onClick={() => handleDeleteRequest(request._id)}>Delete</Button>
                   </Flex>
                   </Grid.Col>
                 </Grid>
