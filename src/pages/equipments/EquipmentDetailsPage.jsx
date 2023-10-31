@@ -102,7 +102,7 @@ function EquipmentDetails() {
           <Text>{equipment.description}</Text>
           <Text>{equipment.available}</Text>
 
-          <Button component={Link} to='/createRequest' state={{ equipment: equipment, owner: equipment.ownedBy, requester: user.userId}} mt={20} variant="filled" color="#288BE2" size="md">
+          <Button component={Link} to='/createRequest' state={{ equipment: equipment, owner: equipment.ownedBy, requester:  user.userId}} mt={20} variant="filled" color="#288BE2" size="md">
             Make a request
           </Button>
         </Flex>

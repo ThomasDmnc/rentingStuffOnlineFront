@@ -60,6 +60,7 @@ function CreateRequest() {
         <Text>When do you want to rent the equipment:</Text>
         <DatePicker
           type="range"
+          minDate={new Date()}
           placeholder="Pick date"
           label="Event date"
           required

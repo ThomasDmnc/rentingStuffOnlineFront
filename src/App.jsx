@@ -17,7 +17,7 @@ import CreateEquipment from "./pages/equipments/CreateEquipmentPage";
 import EditEquipment from "./pages/equipments/EditEquipmentPage";
 import NotFoundPage from './pages/NotFoundPage';
 import CreateRequest from "./pages/requests/CreateRequestPage";
-
+import UserRequests from "./pages/users/UserRequestsPage";
 
 function App() {
   const containerProps = {
@@ -101,6 +101,15 @@ function App() {
             element={
                 <PrivateRoute>
                   <CreateRequest />
+                </PrivateRoute>
+            }
+          />
+          
+          <Route 
+            path="/my-requests"
+            element={
+                <PrivateRoute>
+                  <UserRequests />
                 </PrivateRoute>
             }
           />
