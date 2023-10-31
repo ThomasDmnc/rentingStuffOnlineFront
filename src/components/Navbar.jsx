@@ -57,8 +57,8 @@ function Navbar() {
                 {isLoggedIn && (
                     <>
                     
-                    <Button variant="subtle" color="#288BE2" component={Link} to='/my-listings'  size="md" leftSection={<IconTools size={14} />}>My Equipments</Button>
-                    <Button component={Link} to='/my-requests' state={{user: user}} variant="subtle" color="#288BE2" size="md" leftSection={<IconInbox size={14} />}>My Requests</Button>
+                    <Button variant="subtle" color="#288BE2" component={Link} to='/my-listings'  size="md" mr={10}  leftSection={<IconTools size={14} />}>My Equipments</Button>
+                    <Button component={Link} to='/my-requests' state={{user: user}} variant="subtle" color="#288BE2" size="md"  mr={10} leftSection={<IconInbox size={14} />}>My Requests</Button>
                     <UserBadge size="md" userProps={user}/>
                     </>
                 )}   
@@ -85,7 +85,7 @@ function Navbar() {
                             <Menu.Item component={Link} to='/my-listings' leftSection={<IconTools style={{ width: rem(14), height: rem(14) }} />}>
                             My Equipments
                             </Menu.Item>
-                            <Menu.Item component={Link} state={{user: user}}  to={'/my-requests'} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
+                            <Menu.Item component={Link} state={{user: user}} to={'/my-requests'} leftSection={<IconInbox style={{ width: rem(14), height: rem(14) }} />}>
                             My Requests
                             </Menu.Item>
                             <Menu.Item component={Link} to='/profile' leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
