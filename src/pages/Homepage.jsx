@@ -8,7 +8,7 @@ function Homepage() {
     const [selectedTag, setSelectedTag] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(1); 
+    const [itemsPerPage, setItemsPerPage] = useState(10); 
    
 
     const getEquipments = () => {
@@ -110,9 +110,9 @@ function Homepage() {
                         <Button>Item Per Page ({itemsPerPage}) </Button>
                     </Menu.Target>
                     <Menu.Dropdown>
-                    <MenuItem onClick={() => {setItemsPerPage(1),setCurrentPage(1)}}>1</MenuItem>
-                    <MenuItem onClick={() => {setItemsPerPage(2),setCurrentPage(1)}}>2</MenuItem>
-                    <MenuItem onClick={() => {setItemsPerPage(3),setCurrentPage(1)}}>3</MenuItem>
+                    <MenuItem onClick={() => {setItemsPerPage(10),setCurrentPage(1)}}>10</MenuItem>
+                    <MenuItem onClick={() => {setItemsPerPage(25),setCurrentPage(1)}}>25</MenuItem>
+                    <MenuItem onClick={() => {setItemsPerPage(50),setCurrentPage(1)}}>50</MenuItem>
                     </Menu.Dropdown>
                 </Menu>
             </section>
