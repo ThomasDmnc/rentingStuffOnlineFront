@@ -15,18 +15,13 @@ function CommentGrid({ allcomments }) {
     axios
       .delete(`${import.meta.env.VITE_API_URL}/api/comments/${comment._id}`)
       .then((response) => {
-        console.log(response);
         const newComments = comments.filter(function (el) {
           return el != comment;
         });
         setComments(newComments);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  console.log(user);
+      }).catch((err) => {console.log(err)})
+    }
+  
 
   useEffect(() => {
     setComments(allcomments);

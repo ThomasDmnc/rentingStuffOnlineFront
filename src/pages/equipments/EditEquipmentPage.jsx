@@ -168,16 +168,19 @@ function EditEquipment() {
       </Title>
       <form onSubmit={handleSubmit}>
         <Flex wrap="wrap" justify="center">
-          <Card>
+          <Card bg="#F2F2F2">
             <Card.Section>
-              <Image src={imageUrl} h="10em" radius="md" fit="fill" />
+              <Image mt={10}  src={imageUrl} h="10em" radius="md" fit="fill" />
               <FileInput
                 label="Equipment image"
                 placeholder="Enter Image Url"
                 value={file}
                 onChange={setFile}
+                mt={10} 
               />
               <Button
+                mt={10} 
+                mr={2}
                 variant="filled"
                 onClick={() => {
                   uploadImage();
@@ -186,6 +189,8 @@ function EditEquipment() {
                 Upload
               </Button>
               <Button
+              mt={10} 
+              mr={2}
                 variant="filled"
                 onClick={() => {
                   removeImage();
@@ -199,11 +204,13 @@ function EditEquipment() {
             <TextInput
               label="Name"
               placeholder="Enter Equipment name"
+              mt={10} 
               {...newForm.getInputProps("name")}
             />
             <Textarea
-              label="description"
+              label="Description of your equipment:"
               placeholder="Enter Equipment description"
+              mt={10} 
               {...newForm.getInputProps("description")}
             />
             <Flex wrap={"wrap"}>
@@ -211,6 +218,8 @@ function EditEquipment() {
                 label="Condition"
                 placeholder="Choose condition"
                 data={["poor", "used", "good", "new"]}
+                mt={10} 
+                mr={4}
                 {...newForm.getInputProps("condition")}
               />
               <MultiSelect
@@ -227,6 +236,7 @@ function EditEquipment() {
                 {...newForm.getInputProps("categories")}
                 hidePickedOptions
                 searchable
+                mt={10} 
               />
             </Flex>
             {file && !fileUploaded && (
@@ -239,7 +249,7 @@ function EditEquipment() {
                 Please upload picture before submitting
               </Notification>
             )}
-            <Button type="submit">Update Equipment</Button>
+            <Button mt={20} type="submit">Update Equipment</Button>
           </Container>
         </Flex>
       </form>

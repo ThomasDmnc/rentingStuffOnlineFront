@@ -60,7 +60,7 @@ function UpdateComment() {
           label="Your comment:"
           placeholder="Please write your comment here."
           value={content}
-          mb="1rem"
+          mb="2rem"
           onChange={(event) => setContent(event.currentTarget.value)}
         />
         <Text>Your rating:</Text>
@@ -68,7 +68,7 @@ function UpdateComment() {
           fractions={2}
           value={rating}
           onChange={(event) => setRating(event)}
-          mb="1rem"
+          mb="2rem"
         />
         <Button type="submit">Update your comment</Button>
       </form>

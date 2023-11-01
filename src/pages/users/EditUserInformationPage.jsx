@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -90,40 +91,49 @@ const EditUserInformationPage = () => {
                     />
                   </div>
                 )}
-
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleUpdateImage}
                 />
-              </Flex>
-              <Flex direction="column" gap="md">
-                <TextInput
-                  name="firstName"
-                  label="First Name"
-                  value={userData?.firstName || ""}
-                  onChange={handleInputChange}
-                />
-                <TextInput
-                  name="lastName"
-                  label="Last Name"
-                  value={userData?.lastName || ""}
-                  onChange={handleInputChange}
-                />
-                <TextInput
-                  name="email"
-                  label="Email"
-                  value={userData?.email || ""}
-                  onChange={handleInputChange}
-                />
-                <Button variant="filled" onClick={handleSaveChanges}>
-                  Save Changes
-                </Button>
-              </Flex>
+              </div>
+            )}
+          
+          <FileInput
+                label="Profile image"
+                placeholder="Click to upload"
+                value={file}
+                onChange={setFile}
+              /></Card.Section> </Card>
+              <Flex wrap={"wrap"}>
+          <Container id="form-container">
+            <TextInput
+              name="firstName"
+              label="First Name"
+              value={userData?.firstName || ''}
+              onChange={handleInputChange}
+            />
+            <TextInput
+              name="lastName"
+              label="Last Name"
+              value={userData?.lastName || ''}
+              onChange={handleInputChange}
+            />
+            <TextInput
+              name="email"
+              label="Email"
+              value={userData?.email || ''}
+              onChange={handleInputChange}
+            />
+            <Button variant="filled" onClick={handleSaveChanges}>
+              Save Changes
+            </Button>
+            </Container>
             </Flex>
-          </Paper>
-        </Container>
-      )}
+        </Flex>
+      </Paper>
+    </Container>
+          )}
     </>
   );
 };

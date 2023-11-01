@@ -26,8 +26,7 @@ function Navbar() {
       const toggleDropdown = () => {
         opened ? close() : open();
       };
-    
-      console.log(isLoggedIn)
+
     
     return (  
         <>
