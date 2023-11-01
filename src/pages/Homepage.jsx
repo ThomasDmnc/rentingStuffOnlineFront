@@ -1,14 +1,15 @@
-// Homepage.js
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CardGrid from "../components/CardGrid";
 import axios from "axios";
-import { Title, Flex, Text, Button, Input } from '@mantine/core';
+import { Title, Flex, Text, Button, Input, Menu, MenuItem } from '@mantine/core';
 
 function Homepage() {
     const [equipments, setEquipments] = useState('');
     const [selectedTag, setSelectedTag] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(1); 
+   
 
     const getEquipments = () => {
         let url = `${import.meta.env.VITE_API_URL}/api/equipments`;
@@ -27,20 +28,22 @@ function Homepage() {
         }
 
         axios.get(url)
-        .then((response) =>{
-            setEquipments(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
+            .then((response) => {
+                setEquipments(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
-    
+
     useEffect(() => {
         getEquipments();
     }, [selectedTag, searchTerm]);
 
     const handleTagFilter = (tag) => {
         setSelectedTag(tag);
-        setSearchTerm(''); 
+        setSearchTerm('');
+        setCurrentPage(1);
     };
 
     const allTags = [
@@ -55,10 +58,17 @@ function Homepage() {
 
     const handleSearch = (value) => {
         setSearchTerm(value);
-        setSelectedTag(null); 
+        setSelectedTag(null);
+        setCurrentPage(1);
     };
 
-    return ( 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = equipments.slice(indexOfFirstItem, indexOfLastItem);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    return (
         <>
             <section className="banner">
                 <Flex
@@ -67,12 +77,12 @@ function Homepage() {
                     justify="center"
                     mih="40vh"
                 >
-                <Title order={1} fw={900} c="#288BE2" size="52">Renting Stuff Online</Title>
-                <Text mt="2rem" fw={600}>The place where you get what you want</Text>
+                    <Title order={1} fw={900} c="#288BE2" size="52">Renting Stuff Online</Title>
+                    <Text mt="2rem" fw={600}>The place where you get what you want</Text>
                 </Flex>
             </section>
 
-            <section className="searchBar" style={{ margin: '20px 0' }} >
+            <section className="searchBar" style={{ margin: '20px 0' }}>
                 <Input
                     placeholder="Search by name or description"
                     value={searchTerm}
@@ -82,7 +92,7 @@ function Homepage() {
             </section>
 
             <section className="tagFilters" style={{ margin: '20px 0' }}>
-            <Flex wrap="wrap" justify="center" gap="md">
+                <Flex wrap="wrap" justify="center" gap="md">
                     <Button onClick={() => handleTagFilter(null)}>All</Button>
                     {allTags.map(tag => (
                         <Button key={tag} onClick={() => handleTagFilter(tag)}>{tag}</Button>
@@ -90,8 +100,30 @@ function Homepage() {
                 </Flex>
             </section>
 
+            
             <section className="gridCtn">
-                <CardGrid allEquipments={equipments} />
+                <CardGrid allEquipments={currentItems} />
+            </section>
+            <section className="paginationOptions" style={{ textAlign: "center", margin: "20px 0" }}>
+                <Menu>
+                    <Menu.Target>
+                        <Button>Item Per Page ({itemsPerPage}) </Button>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                    <MenuItem onClick={() => {setItemsPerPage(1),setCurrentPage(1)}}>1</MenuItem>
+                    <MenuItem onClick={() => {setItemsPerPage(2),setCurrentPage(1)}}>2</MenuItem>
+                    <MenuItem onClick={() => {setItemsPerPage(3),setCurrentPage(1)}}>3</MenuItem>
+                    </Menu.Dropdown>
+                </Menu>
+            </section>
+
+
+            <section className="pagination" style={{ textAlign: "center", margin: "20px 0" }}>
+                {[...Array(Math.ceil(equipments.length / itemsPerPage))].map((_, index) => (
+                    <Button key={index + 1} onClick={() => paginate(index + 1)}>
+                        {index + 1}
+                    </Button>
+                ))}
             </section>
         </>
     );

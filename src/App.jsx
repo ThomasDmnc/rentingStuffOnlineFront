@@ -1,6 +1,7 @@
 import "@mantine/core/styles.css";
 import 'dayjs/locale/de';
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { Container } from "@mantine/core";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
@@ -129,6 +130,7 @@ function App() {
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </Container>
+     
     </>
   );
 }
