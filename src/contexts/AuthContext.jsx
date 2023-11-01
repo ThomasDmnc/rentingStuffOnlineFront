@@ -33,7 +33,6 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
-          console.log('test')
         })
         .catch((error) => {
           if (error) {
