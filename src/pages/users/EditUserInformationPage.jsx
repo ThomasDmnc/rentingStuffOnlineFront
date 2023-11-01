@@ -1,18 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import {
-  Container,
-  Paper,
-  Image,
-  Grid,
-  TextInput,
-  Button,
-  Flex,
-  Loader,
-  FileInput,
-} from "@mantine/core";
-import { AuthContext } from "../../contexts/AuthContext";
+
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
+import { AuthContext } from '../../contexts/AuthContext';
+
+
 
 const EditUserInformationPage = () => {
   const { id } = useParams();
@@ -21,15 +14,15 @@ const EditUserInformationPage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const [isLoading,setIsLoading] = useState (true);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`)
-      .then((response) => {
-        setUserData(response.data);
-        setIsLoading(false);
-      });
+    axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {
+      setUserData(response.data); 
+      setIsLoading(false);
+    });
+
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -66,74 +59,73 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-  return (
-    <>
-      {isLoading ? (
-        <Flex justify="center" align="center">
-          <Loader color="#288BE2" size="20em" />
-        </Flex>
-      ) : (
-        <Container size="sm">
-          <Paper bg="#F2F2F2" padding="md">
-            <Flex
-              direction={{ xs: "column", sm: "row" }}
-              align={{ xs: "center", sm: "start" }}
-              gap="md"
-            >
-              <Flex direction="column" align="center" justify="center">
-                {userData && (
-                  <div style={{ marginBottom: "10px" }}>
-                    <Image
-                      src={userData.imageUrl}
-                      width={150}
-                      height={150}
-                      alt={`${userData.firstName} ${userData.lastName}`}
-                    />
-                  </div>
-                )}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleUpdateImage}
-                />
-              </Flex>
 
-              <FileInput
-                label="Profile image"
-                placeholder="Click to upload"
-                value={file}
-                onChange={setFile}
-              />
-              <Flex wrap={"wrap"}>
-                <Container id="form-container">
-                  <TextInput
-                    name="firstName"
-                    label="First Name"
-                    value={userData?.firstName || ""}
-                    onChange={handleInputChange}
-                  />
-                  <TextInput
-                    name="lastName"
-                    label="Last Name"
-                    value={userData?.lastName || ""}
-                    onChange={handleInputChange}
-                  />
-                  <TextInput
-                    name="email"
-                    label="Email"
-                    value={userData?.email || ""}
-                    onChange={handleInputChange}
-                  />
-                  <Button variant="filled" onClick={handleSaveChanges}>
-                    Save Changes
-                  </Button>
-                </Container>
-              </Flex>
-            </Flex>
-          </Paper>
+  return  (<>
+  {isLoading?(<Flex justify="center" align="center">
+          <Loader color="#288BE2" size="20em" />
+        </Flex>):(
+    
+    <Container size="sm">
+    <Paper bg="#F2F2F2" padding="md">
+      <Flex
+        gap="md"
+        justify="space-between"
+        align={['center', 'center', 'start']}
+        direction={['column', 'column', 'row']}
+        wrap="wrap"
+       
+      >
+        <Container id="form-container">
+        <Card>
+          <Card.Section>
+            {userData && (
+              <div style={{ marginBottom: '10px' }}>
+                <Image
+                  src={userData.imageUrl}
+                  width={150}
+                  height={150}
+                  alt={`${userData.firstName} ${userData.lastName}`}
+                />
+              </div>
+            )}
+            <FileInput
+              label="Profile image"
+              placeholder="Click to upload"
+              value={file}
+              onChange={setFile}
+            />
+          </Card.Section>
+        </Card></Container>
+
+        
+        <Container id="form-container">
+          <TextInput
+            name="firstName"
+            label="First Name"
+            value={userData?.firstName || ''}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            name="lastName"
+            label="Last Name"
+            value={userData?.lastName || ''}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            name="email"
+            label="Email"
+            value={userData?.email || ''}
+            onChange={handleInputChange}
+          />
+          <Button variant="filled" onClick={handleSaveChanges}>
+            Save Changes
+          </Button>
         </Container>
-      )}
-    </>
+      </Flex>
+    </Paper>
+  </Container>)}
+  </>
+
   );
 };
 
