@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex } from '@mantine/core';
+import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
 import { AuthContext } from '../../contexts/AuthContext';
+
 
 const EditUserInformationPage = () => {
   const { id } = useParams();
@@ -11,10 +12,12 @@ const EditUserInformationPage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const [isLoading,setIsLoading] = useState (true);
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {
-      setUserData(response.data);
+      setUserData(response.data); 
+      setIsLoading(false);
     });
   }, [userId]);
 
@@ -49,14 +52,17 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-  return  (
+  return  (<>
+  {isLoading?(<Flex justify="center" align="center">
+          <Loader color="#288BE2" size="20em" />
+        </Flex>):(
     
     <Container size="sm">
     <Paper bg="#F2F2F2" padding="md">
       <Flex
         gap="md"
         justify="space-between"
-       align={['center', 'center', 'start']}
+        align={['center', 'center', 'start']}
         direction={['column', 'column', 'row']}
         wrap="wrap"
        
@@ -109,8 +115,8 @@ const EditUserInformationPage = () => {
         </Container>
       </Flex>
     </Paper>
-  </Container>
-    
+  </Container>)}
+  </>
   );
 };
 
