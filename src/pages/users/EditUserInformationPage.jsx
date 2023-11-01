@@ -1,8 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex } from '@mantine/core';
-import { AuthContext } from '../../contexts/AuthContext';
+
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import {
+  Container,
+  Paper,
+  Image,
+  Grid,
+  TextInput,
+  Button,
+  Flex,
+  Loader,
+} from "@mantine/core";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const EditUserInformationPage = () => {
   const { id } = useParams();
@@ -11,11 +21,15 @@ const EditUserInformationPage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {
-      setUserData(response.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`)
+      .then((response) => {
+        setUserData(response.data);
+        setIsLoading(false);
+      });
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -28,19 +42,22 @@ const EditUserInformationPage = () => {
 
   const handleSaveChanges = () => {
     const formData = new FormData();
-    formData.append('imageUrl', file);
-    formData.append('firstName', userData.firstName);
-    formData.append('lastName', userData.lastName);
-    formData.append('email', userData.email);
+    formData.append("imageUrl", file);
+    formData.append("firstName", userData.firstName);
+    formData.append("lastName", userData.lastName);
+    formData.append("email", userData.email);
 
     axios
-      .put(`${import.meta.env.VITE_API_URL}/api/user/upload/${userId}`, formData)
+      .put(
+        `${import.meta.env.VITE_API_URL}/api/user/upload/${userId}`,
+        formData
+      )
       .then((response) => {
-        console.log('User data updated successfully');
-        navigate('/profile');
+        console.log("User data updated successfully");
+        navigate("/profile");
       })
       .catch((error) => {
-        console.error('Error updating user data:', error);
+        console.error("Error updating user data:", error);
       });
   };
 
@@ -50,26 +67,34 @@ const EditUserInformationPage = () => {
   };
 
   return (
-    <Container size="sm">
-      <Paper bg="#F2F2F2" padding="md">
-      <Flex
-      mih={50}
-      gap="md"
-      justify="flex-start"
-      align="center"
-      direction="column"
-      wrap="wrap"
-    >
-         <Card>
-            <Card.Section>
-            {userData && (
-              <div style={{ marginBottom: '10px' }}>
-                <Image
-                  src={userData.imageUrl}
-                  width={150}
-                  height={150}
-                  alt={`${userData.firstName} ${userData.lastName}`}
-
+    <>
+      {isLoading ? (
+        <Flex justify="center" align="center">
+          <Loader color="#288BE2" size="20em" />
+        </Flex>
+      ) : (
+        <Container size="sm">
+          <Paper bg="#F2F2F2" padding="md">
+            <Flex
+              direction={{ xs: "column", sm: "row" }}
+              align={{ xs: "center", sm: "start" }}
+              gap="md"
+            >
+              <Flex direction="column" align="center" justify="center">
+                {userData && (
+                  <div style={{ marginBottom: "10px" }}>
+                    <Image
+                      src={userData.imageUrl}
+                      width={150}
+                      height={150}
+                      alt={`${userData.firstName} ${userData.lastName}`}
+                    />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleUpdateImage}
                 />
               </div>
             )}
@@ -108,6 +133,8 @@ const EditUserInformationPage = () => {
         </Flex>
       </Paper>
     </Container>
+          )}
+    </>
   );
 };
 

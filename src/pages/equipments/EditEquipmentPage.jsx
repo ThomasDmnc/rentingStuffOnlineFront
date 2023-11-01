@@ -150,7 +150,9 @@ function EditEquipment() {
 
   return isLoading ? (
     <>
-      <Loader color="#288BE2" />
+      <Flex justify="center" align="center">
+        <Loader color="#288BE2" size="20em" />
+      </Flex>
     </>
   ) : (
     <Flex
