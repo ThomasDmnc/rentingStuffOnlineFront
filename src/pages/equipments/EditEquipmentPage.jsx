@@ -206,7 +206,7 @@ function EditEquipment() {
               </Button>
             </Card.Section>
           </Card>
-          <Flex w="60%" direction="column" id="form-container">
+          <Flex ml={20} w="60%" direction="column" id="form-container">
             <TextInput
               label="Name"
               placeholder="Enter Equipment name"
@@ -219,7 +219,7 @@ function EditEquipment() {
               mt={20} 
               {...newForm.getInputProps("description")}
             />
-            <Group wrap={"wrap"}>
+            <Group>
               <Select
                 label="Condition"
                 placeholder="Choose condition"
@@ -230,6 +230,7 @@ function EditEquipment() {
               />
               <MultiSelect
                 label="Categories"
+                w={350}
                 data={[
                   "Tennis",
                   "Climbing",

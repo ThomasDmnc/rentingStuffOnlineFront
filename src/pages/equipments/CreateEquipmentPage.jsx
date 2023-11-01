@@ -162,7 +162,7 @@ function CreateEquipment() {
               </Button>
             </Card.Section>
           </Card>
-          <Container id="form-container">
+          <Flex ml={20} w="60%" direction="column"  id="form-container">
             <TextInput
               label="Name"
               placeholder="Enter Equipment name"
@@ -178,7 +178,7 @@ function CreateEquipment() {
               mt={20} 
               {...newForm.getInputProps("description")}
             />
-            <Flex wrap={"wrap"}>
+            <Group>
               <Select
                 label="Condition"
                 placeholder="Choose condition"
@@ -193,6 +193,7 @@ function CreateEquipment() {
                 label="Categories"
                 id="categoriesInput"
                 withAsterisk
+                w={350}
                 data={[
                   "Tennis",
                   "Climbing",
@@ -207,7 +208,7 @@ function CreateEquipment() {
                 searchable
                 mt={20} 
               />
-            </Flex>
+            </Group>
             <Radio.Group
                   name="available"
                   label="Make your equipment ad available:"
@@ -231,7 +232,7 @@ function CreateEquipment() {
               </Notification>
             )}
             <Button mt={20} type="submit">Add Equipment</Button>
-          </Container>
+          </Flex>
         </Flex>
       </form>
     </Flex>
