@@ -46,14 +46,14 @@ function CreateComment() {
           label="Your comment:"
           placeholder="Please write your comment here."
           value={content}
-          mb="1rem"
+          mb="2rem"
           onChange={(event) => setContent(event.currentTarget.value)}
         />
         <Text>Your rating:</Text>
         <Rating
           fractions={2}
           value={rating}
-          mb="1rem"
+          mb="2rem"
           onChange={(event) => setRating(event)}
         />
         <Button type="submit">Create your comment</Button>

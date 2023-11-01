@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
 import { AuthContext } from '../../contexts/AuthContext';
+
 
 
 const EditUserInformationPage = () => {
@@ -12,6 +14,7 @@ const EditUserInformationPage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
+
   const [isLoading,setIsLoading] = useState (true);
 
   useEffect(() => {
@@ -19,6 +22,7 @@ const EditUserInformationPage = () => {
       setUserData(response.data); 
       setIsLoading(false);
     });
+
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -31,19 +35,22 @@ const EditUserInformationPage = () => {
 
   const handleSaveChanges = () => {
     const formData = new FormData();
-    formData.append('imageUrl', file);
-    formData.append('firstName', userData.firstName);
-    formData.append('lastName', userData.lastName);
-    formData.append('email', userData.email);
+    formData.append("imageUrl", file);
+    formData.append("firstName", userData.firstName);
+    formData.append("lastName", userData.lastName);
+    formData.append("email", userData.email);
 
     axios
-      .put(`${import.meta.env.VITE_API_URL}/api/user/upload/${userId}`, formData)
+      .put(
+        `${import.meta.env.VITE_API_URL}/api/user/upload/${userId}`,
+        formData
+      )
       .then((response) => {
-        console.log('User data updated successfully');
-        navigate('/profile');
+        console.log("User data updated successfully");
+        navigate("/profile");
       })
       .catch((error) => {
-        console.error('Error updating user data:', error);
+        console.error("Error updating user data:", error);
       });
   };
 
@@ -51,6 +58,7 @@ const EditUserInformationPage = () => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
   };
+
 
   return  (<>
   {isLoading?(<Flex justify="center" align="center">
@@ -117,6 +125,7 @@ const EditUserInformationPage = () => {
     </Paper>
   </Container>)}
   </>
+
   );
 };
 

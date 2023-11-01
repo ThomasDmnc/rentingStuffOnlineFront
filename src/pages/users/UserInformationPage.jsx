@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Flex, Container, Paper, Image, Text, Grid, Button } from '@mantine/core';
+import { Flex, Container, Paper, Image, Text, Grid, Button, Loader  } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -8,15 +8,22 @@ function UserInformationPage() {
   const { user } = useContext(AuthContext);
   const [userId, setuserId] = useState(user.userId);
   const [userData, setUserData] = useState(null);
+  const [isLoading,setIsLoading] = useState (true);
+
 
   console.log(userId);
   useEffect(() => {
+    
     axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {
       setUserData(response.data);
+      setIsLoading(false);
     });
   }, [user.userId]);
 
-  return (
+  return (<>
+    {isLoading?(<Flex justify="center" align="center">
+            <Loader color="#288BE2" size="20em" />
+          </Flex>):(
     <Container size="sm">
       <Paper bg="#F2F2F2" padding="md">
       <Flex
@@ -49,7 +56,7 @@ function UserInformationPage() {
             </Container>
         </Flex>
       </Paper>
-    </Container>
+    </Container>)} </>
   );
 }
 

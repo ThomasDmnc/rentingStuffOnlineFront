@@ -31,7 +31,6 @@ function EquipmentDetails() {
       .get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
       .then((response) => {
         setEquipment(response.data);
-        setIsLoading(false);
         setOwner(response.data.ownedBy);
       })
       .catch((error) => {
@@ -40,14 +39,17 @@ function EquipmentDetails() {
   };
 
   const getOwnerComments = () => {
+    if (owner && JSON.stringify(owner) !== '{}') {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`)
+      .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`, {manual: !owner})
       .then((response) => {
         setComments(response.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   useEffect(() => {
@@ -55,12 +57,14 @@ function EquipmentDetails() {
   }, []);
 
   useEffect(() => {
-    getOwnerComments();
+    getOwnerComments(owner);
   }, [owner]);
 
   return isLoading ? (
     <>
-      <Loader color="#288BE2" />
+      <Flex justify="center" align="center">
+        <Loader color="#288BE2" size="20em" />
+      </Flex>
     </>
   ) : (
     <>
@@ -74,6 +78,7 @@ function EquipmentDetails() {
         <Flex>
           <Image
             radius="md"
+            fit="contain"
             src={equipment.imageUrl}
           />
         </Flex>
@@ -83,9 +88,14 @@ function EquipmentDetails() {
           justify="space-evenly"
           mih="30rem"
         >
-            <Title order={1} fw={900} c="#288BE2" size="calc(1.5rem * var(--mantine-scale))">
-              {equipment.name}
-            </Title>
+          <Title
+            order={1}
+            fw={900}
+            c="#288BE2"
+            size="calc(1.5rem * var(--mantine-scale))"
+          >
+            {equipment.name}
+          </Title>
           <Badge
             leftSection={icon}
             variant="light"
@@ -96,13 +106,42 @@ function EquipmentDetails() {
           >
             {equipment.condition}
           </Badge>
+          <Text>Categories:</Text>
+          <Text>{equipment.categories.map((category) => {
+            return(
+              <>
+                <Badge
+                color="#288BE2"
+                size="lg"
+                radius="md"
+                tt="capitalize"
+                mr={5}
+                mt={5}
+              >
+                {category}
+              </Badge>
+            </>
+            )
+          })}</Text>
           <Title order={4} fw={900}>
             Description:
           </Title>
           <Text>{equipment.description}</Text>
           <Text>{equipment.available}</Text>
 
-          <Button component={Link} to='/createRequest' state={{ equipment: equipment, owner: equipment.ownedBy, requester:  user.userId}} mt={20} variant="filled" color="#288BE2" size="md">
+          <Button
+            component={Link}
+            to="/createRequest"
+            state={{
+              equipment: equipment,
+              owner: equipment.ownedBy,
+              requester: user.userId,
+            }}
+            mt={20}
+            variant="filled"
+            color="#288BE2"
+            size="md"
+          >
             Make a request
           </Button>
         </Flex>
