@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Paper, Image, Grid, TextInput, Button, Flex } from '@mantine/core';
+import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex } from '@mantine/core';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const EditUserInformationPage = () => {
@@ -52,8 +52,16 @@ const EditUserInformationPage = () => {
   return (
     <Container size="sm">
       <Paper bg="#F2F2F2" padding="md">
-      <Flex direction={{ xs: 'column', sm: 'row' }} align={{ xs: 'center', sm: 'start' }} gap="md">
-          <Flex direction="column" align="center" justify="center">
+      <Flex
+      mih={50}
+      gap="md"
+      justify="flex-start"
+      align="center"
+      direction="column"
+      wrap="wrap"
+    >
+         <Card>
+            <Card.Section>
             {userData && (
               <div style={{ marginBottom: '10px' }}>
                 <Image
@@ -66,9 +74,14 @@ const EditUserInformationPage = () => {
               </div>
             )}
           
-            <input type="file" accept="image/*" onChange={handleUpdateImage} />
-          </Flex>
-          <Flex direction="column" gap="md">
+          <FileInput
+                label="Profile image"
+                placeholder="Click to upload"
+                value={file}
+                onChange={setFile}
+              /></Card.Section> </Card>
+              <Flex wrap={"wrap"}>
+          <Container id="form-container">
             <TextInput
               name="firstName"
               label="First Name"
@@ -90,7 +103,8 @@ const EditUserInformationPage = () => {
             <Button variant="filled" onClick={handleSaveChanges}>
               Save Changes
             </Button>
-          </Flex>
+            </Container>
+            </Flex>
         </Flex>
       </Paper>
     </Container>
