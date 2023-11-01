@@ -7,7 +7,7 @@ import {
   Badge,
   Image,
   Button,
-  Title,
+  Space,
   Radio,
   Group,
   Textarea,
@@ -54,19 +54,23 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
         requests.map((request) => {
           return (
             <Grid.Col key={request._id} span={12}>
-              <Flex direction="column">
-                <Flex direction="column">
+
+              <Grid bg="#FFFFFF" mt="1em" shadow="sm" style={{ borderRadius: "10px", border: '1px solid #E8E9EB', boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 3px 0px, rgba(0, 0, 0, 0.05) 0px 10px 15px -5px, rgba(0, 0, 0, 0.04) 0px 7px 7px -5px'}} p="2em">
+                <Grid.Col span={12}>
+                <Flex direction="column" mb="2em">
                   <Text>
                     Request for: {request.equipmentId.name}, from{" "}
                     {request.requesterId.firstName}{" "}
                     {request.requesterId.lastName}
                   </Text>
-                  <Flex align="center">
+                  <Space h="md" />
+                  <Flex direction={{ base: 'column', sm: 'row' }} align={{ base: 'start', sm: 'center' }}>
                     <Text mr="10">From:</Text>
                     <DateInput
                       variant="unstyled"
                       value={new Date(request.startDate)}
                       disabled
+                      mr="10"
                     />
                     <Text mr="10">to</Text>
                     <DateInput
@@ -76,9 +80,11 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                     />
                   </Flex>
                 </Flex>
+                </Grid.Col>
 
-                <Flex>
-                  <Grid>
+
+                <Grid.Col span={12}>
+                <Grid>
                     <Grid.Col span={2}>
                       <Image fit="contain" src={request.equipmentId.imageUrl} />
                     </Grid.Col>
@@ -87,6 +93,7 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                         <Text>
                           Status:
                           <Badge
+                            ml="10"
                             leftSection=""
                             variant="light"
                             color="#288BE2"
@@ -97,8 +104,9 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                             {request.status}
                           </Badge>
                         </Text>
-
+                        <Space h="md" />
                         <Text>Message from the requester:</Text>
+                        <Space h="sm" />
                         {!request.requestMessage ? (
                           <Text>No resquest message.</Text>
                         ) : (
@@ -119,13 +127,14 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                             updateAvailability(request.equipmentId._id)
                           }
                         >
-                          Make your equipment availabe again
+                          Make your equipment availabe
                         </Button>
                       ) : null}
                     </Grid.Col>
                   </Grid>
-                </Flex>
-              </Flex>
+                </Grid.Col>
+
+              </Grid>
             </Grid.Col>
           );
         })}

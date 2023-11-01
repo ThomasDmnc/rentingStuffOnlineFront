@@ -1,6 +1,6 @@
 import {
   Flex,
-  Container,
+  Grid,
   Card,
   Image,
   TextInput,
@@ -104,7 +104,7 @@ function EditEquipment() {
           description: response.data.description,
           condition: response.data.condition,
           categories: response.data.categories,
-          available: response.data.available.toString()
+          available: response.data.available.toString(),
         });
         setIsLoading(false);
       })
@@ -161,119 +161,126 @@ function EditEquipment() {
       </Flex>
     </>
   ) : (
-    <Flex
-      mih={50}
-      gap="md"
-      justify="flex-start"
-      align="center"
-      direction="column"
-      wrap="wrap"
-    >
+    <>
       <Title order={1} fw={900} c="#288BE2" size="52">
         Update Equipment
       </Title>
       <form onSubmit={handleSubmit}>
-        <Flex wrap="wrap" justify="center">
-          <Card bg="#F2F2F2">
-            <Card.Section>
-              <Image mt={20}  src={imageUrl} h="8em" radius="md" fit="contain" />
-              <FileInput
-                label="Equipment image"
-                placeholder="Enter Image Url"
-                value={file}
-                onChange={setFile}
-                mt={20} 
-              />
-              <Button
-                mt={20} 
-                mr={2}
-                variant="filled"
-                onClick={() => {
-                  uploadImage();
-                }}
-              >
-                Upload
-              </Button>
-              <Button
-              mt={20} 
-              mr={2}
-                variant="filled"
-                onClick={() => {
-                  removeImage();
-                }}
-              >
-                Remove
-              </Button>
-            </Card.Section>
-          </Card>
-          <Flex ml={20} w="60%" direction="column" id="form-container">
-            <TextInput
-              label="Name"
-              placeholder="Enter Equipment name"
-              mt={20} 
-              {...newForm.getInputProps("name")}
-            />
-            <Textarea
-              label="Description of your equipment:"
-              placeholder="Enter Equipment description"
-              mt={20} 
-              {...newForm.getInputProps("description")}
-            />
-            <Group>
-              <Select
-                label="Condition"
-                placeholder="Choose condition"
-                data={["poor", "used", "good", "new"]}
-                mt={20} 
-                mr={4}
-                {...newForm.getInputProps("condition")}
-              />
-              <MultiSelect
-                label="Categories"
-                w={350}
-                data={[
-                  "Tennis",
-                  "Climbing",
-                  "Fishing",
-                  "Hiking",
-                  "Surfing",
-                  "Biking",
-                  "Skiing",
-                ]}
-                {...newForm.getInputProps("categories")}
-                hidePickedOptions
-                searchable
-                mt={20} 
-              />
-            </Group>
-            <Radio.Group
-                  name="available"
-                  label="Make your equipment ad available:"
-                  description="If you're equipment is unavailable it won't be seen by others."
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 4, lg: 4 }}>
+            <Card bg="#F2F2F2">
+              <Card.Section>
+                <Image
                   mt={20}
-                  value={newForm.available}
-                  {...newForm.getInputProps("available")}
+                  src={imageUrl}
+                  h="10em"
+                  radius="md"
+                  fit="contain"
+                />
+                <FileInput
+                  label="Equipment image"
+                  placeholder="Enter Image Url"
+                  value={file}
+                  onChange={setFile}
+                  mt={20}
+                />
+                <Flex justify="center" align="center">
+                <Button
+                  mt={20}
+                  mr={2}
+                  variant="filled"
+                  onClick={() => {
+                    uploadImage();
+                  }}
+                >
+                  Upload
+                </Button>
+                <Button
+                  mt={20}
+                  mr={2}
+                  variant="filled"
+                  onClick={() => {
+                    removeImage();
+                  }}
+                >
+                  Remove
+                </Button>
+                </Flex>
+              </Card.Section>
+            </Card>
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 8, lg: 8 }}>
+            <Flex direction="column" id="form-container">
+              <TextInput
+                label="Name"
+                placeholder="Enter Equipment name"
+                mt={20}
+                {...newForm.getInputProps("name")}
+              />
+              <Textarea
+                label="Description of your equipment:"
+                placeholder="Enter Equipment description"
+                mt={20}
+                {...newForm.getInputProps("description")}
+              />
+              <Group>
+                <Select
+                  label="Condition"
+                  placeholder="Choose condition"
+                  data={["poor", "used", "good", "new"]}
+                  mt={20}
+                  mr={4}
+                  {...newForm.getInputProps("condition")}
+                />
+                <MultiSelect
+                  label="Categories"
+                  w={350}
+                  data={[
+                    "Tennis",
+                    "Climbing",
+                    "Fishing",
+                    "Hiking",
+                    "Surfing",
+                    "Biking",
+                    "Skiing",
+                  ]}
+                  {...newForm.getInputProps("categories")}
+                  hidePickedOptions
+                  searchable
+                  mt={20}
+                />
+              </Group>
+              <Radio.Group
+                name="available"
+                label="Make your equipment ad available:"
+                description="If you're equipment is unavailable it won't be seen by others."
+                mt={20}
+                value={newForm.available}
+                {...newForm.getInputProps("available")}
               >
                 <Group mt="xs">
                   <Radio value="true" label="Available" />
                   <Radio value="false" label="Unvailable" />
                 </Group>
               </Radio.Group>
-            {file && !fileUploaded && (
-              <Notification
-                icon={xIcon}
-                color="red"
-                title="Stop!"
-                withCloseButton={false}
-              >
-                Please upload picture before submitting
-              </Notification>
-            )}
-            <Button mt={20} type="submit">Update Equipment</Button>
-          </Flex>
-        </Flex>
+              {file && !fileUploaded && (
+                <Notification
+                  icon={xIcon}
+                  color="red"
+                  title="Stop!"
+                  withCloseButton={false}
+                >
+                  Please upload picture before submitting
+                </Notification>
+              )}
+              <Button mt={20} type="submit">
+                Update Equipment
+              </Button>
+            </Flex>
+          </Grid.Col>
+        </Grid>
       </form>
-    </Flex>
+    </>
   );
 }
 
