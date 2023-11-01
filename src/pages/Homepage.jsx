@@ -12,6 +12,8 @@ import {
   Pagination,
 } from "@mantine/core";
 
+import "../styles/homepage.css";
+
 function Homepage() {
   const [equipments, setEquipments] = useState("");
   const [filteredEquipments, setFilteredEquipments] = useState("");
@@ -61,7 +63,12 @@ function Homepage() {
     handleSearch();
   }, [equipments]);
 
-  const handleTagFilter = (tag) => {
+  const handleTagFilter = (tag, event) => {
+    const allTags = document.getElementsByClassName("tag");
+    for (let i = 0; i < allTags.length; i++) {
+      allTags[i].classList.remove("active-tag");
+    }
+    event.currentTarget.classList.add("active-tag");
     setSelectedTag(tag);
     setCurrentPage(1);
   };
@@ -122,9 +129,20 @@ function Homepage() {
 
       <section className="tagFilters" style={{ margin: "20px 0" }}>
         <Flex wrap="wrap" justify="center" gap="md">
-          <Button onClick={() => handleTagFilter(null)}>All</Button>
+          <Button
+            className="tag active-tag"
+            variant="filled"
+            onClick={(event) => handleTagFilter(null, event)}
+          >
+            All
+          </Button>
           {allTags.map((tag) => (
-            <Button key={tag} onClick={() => handleTagFilter(tag)}>
+            <Button
+              className="tag"
+              variant="filled"
+              key={tag}
+              onClick={(event) => handleTagFilter(tag, event)}
+            >
               {tag}
             </Button>
           ))}
