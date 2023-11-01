@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CardGrid from "../components/CardGrid";
 import axios from "axios";
-import { Title, Flex, Text, Button, Input, Menu, MenuItem } from '@mantine/core';
+import { Title, Flex, Text, Button, Input, Menu, MenuItem, Pagination, rem } from '@mantine/core';
 
 function Homepage() {
     const [equipments, setEquipments] = useState('');
@@ -12,7 +12,7 @@ function Homepage() {
    
 
     const getEquipments = () => {
-        let url = `${import.meta.env.VITE_API_URL}/api/equipments`;
+        let url = `${import.meta.env.VITE_API_URL}/api/equipments?available=true`;
 
         const queryParams = [];
 
@@ -24,7 +24,7 @@ function Homepage() {
         }
 
         if (queryParams.length > 0) {
-            url += `?${queryParams.join('&')}`;
+            url += `&${queryParams.join('&')}`;
         }
 
         axios.get(url)
@@ -39,6 +39,7 @@ function Homepage() {
     useEffect(() => {
         getEquipments();
     }, [selectedTag, searchTerm]);
+
 
     const handleTagFilter = (tag) => {
         setSelectedTag(tag);
@@ -119,11 +120,9 @@ function Homepage() {
 
 
             <section className="pagination" style={{ textAlign: "center", margin: "20px 0" }}>
-                {[...Array(Math.ceil(equipments.length / itemsPerPage))].map((_, index) => (
-                    <Button key={index + 1} onClick={() => paginate(index + 1)}>
-                        {index + 1}
-                    </Button>
-                ))}
+                <Flex justify="center" align="center" mt="2rem">
+                <Pagination value={currentPage} onChange={setCurrentPage}  total={Math.ceil(equipments.length / itemsPerPage)} />
+                </Flex>
             </section>
         </>
     );

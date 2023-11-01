@@ -11,6 +11,8 @@ import {
   Select,
   FileInput,
   Notification,
+  Radio,
+  Group,
   rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -40,6 +42,7 @@ function CreateEquipment() {
       description: "",
       condition: "",
       categories: [],
+      available: "true",
     },
     validate: {
       name: (value) =>
@@ -94,6 +97,7 @@ function CreateEquipment() {
       const description = newForm.getInputProps("description").value;
       const condition = newForm.getInputProps("condition").value;
       const categories = newForm.getInputProps("categories").value;
+      const available = newForm.getInputProps("available").value;
       const payload = {
         name,
         description,
@@ -101,6 +105,7 @@ function CreateEquipment() {
         categories,
         ownedBy,
         imageUrl,
+        available,
       };
       console.log(payload);
       axios
@@ -141,46 +146,46 @@ function CreateEquipment() {
         <Flex wrap="wrap" justify="center" align="space-between">
           <Card bg="#F2F2F2">
             <Card.Section >
-              <Image mt={10}  src={imageUrl} radius="md" fit="contain" h="5rem" />
+              <Image mt={20}  src={imageUrl} radius="md" fit="contain" h="5rem" />
               <FileInput
                 label="Equipment image"
                 placeholder="Click to upload"
                 value={file}
                 onChange={setFile}
-                mt={10} 
+                mt={20} 
               />
-              <Button mt={10} mr={2} variant="filled" onClick={uploadImage}>
+              <Button mt={20} mr={2} variant="filled" onClick={uploadImage}>
                 Upload
               </Button>
-              <Button mt={10} mr={2} variant="filled" onClick={removeImage}>
+              <Button mt={20} mr={2} variant="filled" onClick={removeImage}>
                 Remove
               </Button>
             </Card.Section>
           </Card>
-          <Container id="form-container">
+          <Flex ml={20} w="60%" direction="column"  id="form-container">
             <TextInput
               label="Name"
               placeholder="Enter Equipment name"
               withAsterisk
               id="nameInput"
-              mt={10} 
+              mt={20} 
               {...newForm.getInputProps("name")}
             />
             <Textarea
               label="Description of your equipment:"
               placeholder="Enter Equipment description"
               id="descriptionInput"
-              mt={10} 
+              mt={20} 
               {...newForm.getInputProps("description")}
             />
-            <Flex wrap={"wrap"}>
+            <Group>
               <Select
                 label="Condition"
                 placeholder="Choose condition"
                 withAsterisk
                 id="conditionInput"
                 data={["poor", "used", "good", "new"]}
-                mt={10} 
+                mt={20} 
                 mr={4}
                 {...newForm.getInputProps("condition")}
               />
@@ -188,6 +193,7 @@ function CreateEquipment() {
                 label="Categories"
                 id="categoriesInput"
                 withAsterisk
+                w={350}
                 data={[
                   "Tennis",
                   "Climbing",
@@ -200,9 +206,21 @@ function CreateEquipment() {
                 {...newForm.getInputProps("categories")}
                 hidePickedOptions
                 searchable
-                mt={10} 
+                mt={20} 
               />
-            </Flex>
+            </Group>
+            <Radio.Group
+                  name="available"
+                  label="Make your equipment ad available:"
+                  description="If you're equipment is unavailable it won't be seen by others."
+                  mt={20}
+                  {...newForm.getInputProps("available")}
+              >
+                <Group mt="xs">
+                  <Radio value="true" label="Available" />
+                  <Radio value="false" label="Unvailable" />
+                </Group>
+              </Radio.Group>
             {file && !fileUploaded && (
               <Notification
                 icon={xIcon}
@@ -214,7 +232,7 @@ function CreateEquipment() {
               </Notification>
             )}
             <Button mt={20} type="submit">Add Equipment</Button>
-          </Container>
+          </Flex>
         </Flex>
       </form>
     </Flex>
