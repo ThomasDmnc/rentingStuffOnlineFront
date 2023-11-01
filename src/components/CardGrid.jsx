@@ -25,7 +25,7 @@ function CardGrid({ isUpdate, allEquipments }) {
       });
   };
   return (
-    <Grid gutter="lg" spacing="lg" mb={100}>
+    <Grid gutter="lg" align="stretch" spacing="lg" mb={100}>
       {equipments &&
         equipments.map((equipment) => {
           return (

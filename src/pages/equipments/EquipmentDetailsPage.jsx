@@ -108,6 +108,8 @@ function EquipmentDetails() {
                 size="lg"
                 radius="md"
                 tt="capitalize"
+                mr={5}
+                mt={5}
               >
                 {category}
               </Badge>
