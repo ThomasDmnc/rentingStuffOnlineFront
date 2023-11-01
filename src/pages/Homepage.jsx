@@ -40,6 +40,7 @@ function Homepage() {
         getEquipments();
     }, [selectedTag, searchTerm]);
 
+
     const handleTagFilter = (tag) => {
         setSelectedTag(tag);
         setSearchTerm('');

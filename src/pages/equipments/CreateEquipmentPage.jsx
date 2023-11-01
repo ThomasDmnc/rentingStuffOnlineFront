@@ -42,7 +42,7 @@ function CreateEquipment() {
       description: "",
       condition: "",
       categories: [],
-      available: "false",
+      available: "true",
     },
     validate: {
       name: (value) =>
