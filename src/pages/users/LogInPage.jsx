@@ -23,8 +23,6 @@ function LoginPage() {
     e.preventDefault();
 
     const { email, password } = formData;
-    console.log('Username:', email);
-    console.log('Password:', password);
     
     axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, JSON.stringify(formData),{
       headers: {

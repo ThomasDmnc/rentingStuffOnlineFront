@@ -31,7 +31,6 @@ function EquipmentDetails() {
       .get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
       .then((response) => {
         setEquipment(response.data);
-        setIsLoading(false);
         setOwner(response.data.ownedBy);
       })
       .catch((error) => {
@@ -40,14 +39,17 @@ function EquipmentDetails() {
   };
 
   const getOwnerComments = () => {
+    if (owner && JSON.stringify(owner) !== '{}') {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`)
+      .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`, {manual: !owner})
       .then((response) => {
         setComments(response.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   useEffect(() => {
@@ -55,7 +57,7 @@ function EquipmentDetails() {
   }, []);
 
   useEffect(() => {
-    getOwnerComments();
+    getOwnerComments(owner);
   }, [owner]);
 
   return isLoading ? (
@@ -74,6 +76,7 @@ function EquipmentDetails() {
         <Flex>
           <Image
             radius="md"
+            fit="contain"
             src={equipment.imageUrl}
           />
         </Flex>
@@ -96,6 +99,23 @@ function EquipmentDetails() {
           >
             {equipment.condition}
           </Badge>
+          <Text>Categories:</Text>
+          <Text>{equipment.categories.map((category) => {
+            return(
+              <>
+                <Badge
+                color="#288BE2"
+                size="lg"
+                radius="md"
+                tt="capitalize"
+                mr={5}
+                mt={5}
+              >
+                {category}
+              </Badge>
+            </>
+            )
+          })}</Text>
           <Title order={4} fw={900}>
             Description:
           </Title>

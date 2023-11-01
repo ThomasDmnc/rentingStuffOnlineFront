@@ -14,7 +14,6 @@ function CommentGrid({ allcomments }) {
     const handleDelete = (comment) => {
       axios.delete(`${import.meta.env.VITE_API_URL}/api/comments/${comment._id}`)
       .then((response) => {
-        console.log(response)
         const newComments = comments.filter(function (el) {
             return el != comment;
           })
@@ -22,14 +21,11 @@ function CommentGrid({ allcomments }) {
       }).catch((err) => {console.log(err)})
     }
   
-    console.log(user);
 
     useEffect(() =>{
         setComments(allcomments)
     }, [allcomments])
 
-    console.log(typeof comments)
-    console.log( comments)
     return isLoading ? (<><Loader color="#288BE2" /></>) : (
         <>
          <Grid gutter="lg"  spacing="lg" mt={20}>

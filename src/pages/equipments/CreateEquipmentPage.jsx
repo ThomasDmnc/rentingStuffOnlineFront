@@ -139,19 +139,20 @@ function CreateEquipment() {
       </Title>
       <form onSubmit={handleSubmit}>
         <Flex wrap="wrap" justify="center" align="space-between">
-          <Card>
-            <Card.Section>
-              <Image src={imageUrl} radius="md" fit="contain" h="5rem" />
+          <Card bg="#F2F2F2">
+            <Card.Section >
+              <Image mt={10}  src={imageUrl} radius="md" fit="contain" h="5rem" />
               <FileInput
                 label="Equipment image"
                 placeholder="Click to upload"
                 value={file}
                 onChange={setFile}
+                mt={10} 
               />
-              <Button variant="filled" onClick={uploadImage}>
+              <Button mt={10} mr={2} variant="filled" onClick={uploadImage}>
                 Upload
               </Button>
-              <Button variant="filled" onClick={removeImage}>
+              <Button mt={10} mr={2} variant="filled" onClick={removeImage}>
                 Remove
               </Button>
             </Card.Section>
@@ -162,12 +163,14 @@ function CreateEquipment() {
               placeholder="Enter Equipment name"
               withAsterisk
               id="nameInput"
+              mt={10} 
               {...newForm.getInputProps("name")}
             />
             <Textarea
-              label="description"
+              label="Description of your equipment:"
               placeholder="Enter Equipment description"
               id="descriptionInput"
+              mt={10} 
               {...newForm.getInputProps("description")}
             />
             <Flex wrap={"wrap"}>
@@ -177,6 +180,8 @@ function CreateEquipment() {
                 withAsterisk
                 id="conditionInput"
                 data={["poor", "used", "good", "new"]}
+                mt={10} 
+                mr={4}
                 {...newForm.getInputProps("condition")}
               />
               <MultiSelect
@@ -195,6 +200,7 @@ function CreateEquipment() {
                 {...newForm.getInputProps("categories")}
                 hidePickedOptions
                 searchable
+                mt={10} 
               />
             </Flex>
             {file && !fileUploaded && (
@@ -207,7 +213,7 @@ function CreateEquipment() {
                 Please upload picture before submitting
               </Notification>
             )}
-            <Button type="submit">Add Equipment</Button>
+            <Button mt={20} type="submit">Add Equipment</Button>
           </Container>
         </Flex>
       </form>
