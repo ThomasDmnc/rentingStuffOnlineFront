@@ -10,7 +10,6 @@ import {
   Menu,
   MenuItem,
   Pagination,
-  rem,
 } from "@mantine/core";
 
 function Homepage() {
@@ -32,7 +31,6 @@ function Homepage() {
 
     if (queryParams.length > 0) {
       url += `&${queryParams.join("&")}`;
-      console.log(url);
     }
 
     axios
@@ -79,9 +77,6 @@ function Homepage() {
   ];
 
   const handleSearch = () => {
-    console.log(equipments);
-    console.log(filteredEquipments);
-    console.log(searchTerm);
     if (equipments) {
       const regex = new RegExp(`.*${searchTerm}.*`, "i");
       console.log(regex);
@@ -91,6 +86,7 @@ function Homepage() {
       console.log(tempFilteredEquipments);
       setFilteredEquipments(tempFilteredEquipments);
     }
+    setCurrentPage(1);
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
