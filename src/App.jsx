@@ -19,7 +19,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import CreateRequest from "./pages/requests/CreateRequestPage";
 import EditRequest from "./pages/requests/EditRequestPage";
 import UserRequests from "./pages/users/UserRequestsPage";
-
+import Footer from "./components/Footer";
 function App() {
   const containerProps = {
     h: "100vh",
@@ -128,8 +128,9 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>
+        <Footer />
       </Container>
-     
+      
     </>
   );
 }
