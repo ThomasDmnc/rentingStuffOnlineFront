@@ -63,9 +63,9 @@ function UserRequests() {
         </Flex>
       )}
       {!isLoadingSent && (
-        <Grid gutter="lg" spacing="lg" mt={20} mb={20}>
+        <Grid gutter="lg" spacing="lg" mt={0} mb={20}>
           {!sentRequests || sentRequests.length === 0 ? (
-            <Grid.Col>
+            <Grid.Col mt="1em">
               <Text>You didn&apos;t sent any request to rent equipment.</Text>
             </Grid.Col>
           ) : (
@@ -92,7 +92,7 @@ function UserRequests() {
       {!isLoadingReceived && (
         <Grid gutter="lg" spacing="lg" mt={20} mb={20}>
           {!receivedRequests || receivedRequests.length === 0 ? (
-            <Grid.Col>
+            <Grid.Col mt="1em">
               <Text>You didn't received any request to rent equipment.</Text>
             </Grid.Col>
           ) : (
