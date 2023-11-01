@@ -11,6 +11,7 @@ import {
   Title,
   Notification,
   rem,
+  Loader,
 } from "@mantine/core";
 import { hasLength, isEmail, useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,8 @@ function SignupPage() {
   const [file, setFile] = useState(null);
   const [fileUploaded, setFileUploaded] = useState(true);
   const xIcon = <IconX style={{ width: rem(20), height: rem(20) }} />;
+
+  const [imageLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
     setFileUploaded(false);
@@ -87,15 +90,17 @@ function SignupPage() {
   function uploadImage() {
     const formData = new FormData();
     formData.append("imageUrl", file);
-
+    setImageLoading(true);
     axios
       .put(`${import.meta.env.VITE_API_URL}/auth/upload`, formData)
       .then((response) => {
         newForm.setFieldValue("imgUrl", response.data.file);
         setFileUploaded(true);
+        setImageLoading(false);
       })
       .catch((error) => {
         console.log(error.response.data.message);
+        setImageLoading(false);
       });
 
     console.log("Uploading image");
@@ -111,7 +116,12 @@ function SignupPage() {
     <Flex direction="column" justify="center">
       <Title>Sign Up</Title>
       <Flex wrap="wrap" w="100%" justify="center">
-        <Image src={newForm.getInputProps("imgUrl").value} h="10em" />
+        {imageLoading ? (
+          <Loader color="blue" size="10em" />
+        ) : (
+          <Image src={newForm.getInputProps("imgUrl").value} h="10em" />
+        )}
+
         <div>
           <FileInput
             label="Profile picture"

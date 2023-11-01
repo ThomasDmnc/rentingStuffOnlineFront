@@ -60,7 +60,9 @@ function EquipmentDetails() {
 
   return isLoading ? (
     <>
-      <Loader color="#288BE2" />
+      <Flex justify="center" align="center">
+        <Loader color="#288BE2" size="20em" />
+      </Flex>
     </>
   ) : (
     <>
@@ -72,10 +74,7 @@ function EquipmentDetails() {
         mt={50}
       >
         <Flex>
-          <Image
-            radius="md"
-            src={equipment.imageUrl}
-          />
+          <Image radius="md" src={equipment.imageUrl} />
         </Flex>
         <Flex
           direction="column"
@@ -83,9 +82,14 @@ function EquipmentDetails() {
           justify="space-evenly"
           mih="30rem"
         >
-            <Title order={1} fw={900} c="#288BE2" size="calc(1.5rem * var(--mantine-scale))">
-              {equipment.name}
-            </Title>
+          <Title
+            order={1}
+            fw={900}
+            c="#288BE2"
+            size="calc(1.5rem * var(--mantine-scale))"
+          >
+            {equipment.name}
+          </Title>
           <Badge
             leftSection={icon}
             variant="light"
@@ -102,7 +106,19 @@ function EquipmentDetails() {
           <Text>{equipment.description}</Text>
           <Text>{equipment.available}</Text>
 
-          <Button component={Link} to='/createRequest' state={{ equipment: equipment, owner: equipment.ownedBy, requester:  user.userId}} mt={20} variant="filled" color="#288BE2" size="md">
+          <Button
+            component={Link}
+            to="/createRequest"
+            state={{
+              equipment: equipment,
+              owner: equipment.ownedBy,
+              requester: user.userId,
+            }}
+            mt={20}
+            variant="filled"
+            color="#288BE2"
+            size="md"
+          >
             Make a request
           </Button>
         </Flex>
