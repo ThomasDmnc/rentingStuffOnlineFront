@@ -12,7 +12,7 @@ function Homepage() {
    
 
     const getEquipments = () => {
-        let url = `${import.meta.env.VITE_API_URL}/api/equipments`;
+        let url = `${import.meta.env.VITE_API_URL}/api/equipments?available=true`;
 
         const queryParams = [];
 
@@ -24,7 +24,7 @@ function Homepage() {
         }
 
         if (queryParams.length > 0) {
-            url += `?${queryParams.join('&')}`;
+            url += `&${queryParams.join('&')}`;
         }
 
         axios.get(url)
