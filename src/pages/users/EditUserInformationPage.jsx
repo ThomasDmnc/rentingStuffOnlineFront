@@ -49,19 +49,21 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-  return (
+  return  (
+    
     <Container size="sm">
-      <Paper bg="#F2F2F2" padding="md">
+    <Paper bg="#F2F2F2" padding="md">
       <Flex
-      mih={50}
-      gap="md"
-      justify="flex-start"
-      align="center"
-      direction="column"
-      wrap="wrap"
-    >
-         <Card>
-            <Card.Section>
+        gap="md"
+        justify="space-between"
+       align={['center', 'center', 'start']}
+        direction={['column', 'column', 'row']}
+        wrap="wrap"
+       
+      >
+        <Container id="form-container">
+        <Card>
+          <Card.Section>
             {userData && (
               <div style={{ marginBottom: '10px' }}>
                 <Image
@@ -69,45 +71,46 @@ const EditUserInformationPage = () => {
                   width={150}
                   height={150}
                   alt={`${userData.firstName} ${userData.lastName}`}
-
                 />
               </div>
             )}
-          
-          <FileInput
-                label="Profile image"
-                placeholder="Click to upload"
-                value={file}
-                onChange={setFile}
-              /></Card.Section> </Card>
-              <Flex wrap={"wrap"}>
-          <Container id="form-container">
-            <TextInput
-              name="firstName"
-              label="First Name"
-              value={userData?.firstName || ''}
-              onChange={handleInputChange}
+            <FileInput
+              label="Profile image"
+              placeholder="Click to upload"
+              value={file}
+              onChange={setFile}
             />
-            <TextInput
-              name="lastName"
-              label="Last Name"
-              value={userData?.lastName || ''}
-              onChange={handleInputChange}
-            />
-            <TextInput
-              name="email"
-              label="Email"
-              value={userData?.email || ''}
-              onChange={handleInputChange}
-            />
-            <Button variant="filled" onClick={handleSaveChanges}>
-              Save Changes
-            </Button>
-            </Container>
-            </Flex>
-        </Flex>
-      </Paper>
-    </Container>
+          </Card.Section>
+        </Card></Container>
+
+        
+        <Container id="form-container">
+          <TextInput
+            name="firstName"
+            label="First Name"
+            value={userData?.firstName || ''}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            name="lastName"
+            label="Last Name"
+            value={userData?.lastName || ''}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            name="email"
+            label="Email"
+            value={userData?.email || ''}
+            onChange={handleInputChange}
+          />
+          <Button variant="filled" onClick={handleSaveChanges}>
+            Save Changes
+          </Button>
+        </Container>
+      </Flex>
+    </Paper>
+  </Container>
+    
   );
 };
 

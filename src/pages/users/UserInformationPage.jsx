@@ -20,32 +20,33 @@ function UserInformationPage() {
     <Container size="sm">
       <Paper bg="#F2F2F2" padding="md">
       <Flex
-      mih={50}
       gap="md"
-      justify="flex-start"
-      align="center"
-      direction="column"
+      justify="space-between"
+      align={['center', 'center', 'start']}
+      direction={['column', 'column', 'row']}
       wrap="wrap"
     >
-          <Flex direction="column" align="center">
+          <Container id="form-container">
             <Image
               src={userData?.imageUrl || '../src/assets/defaultAvatar.png'}
               width={150}
               height={150}
               alt={`${userData?.firstName || ''} ${userData?.lastName || ''}`}
             />
+            
+            </Container>
+            <Container id="form-container">
+          
+            <Text size="xl">{`${userData?.firstName || ''} ${userData?.lastName || ''}`}</Text>
+            <Text size="sm" color="gray" style={{ marginBottom: '10px' }}>
+              {userData?.email || ''}
+            </Text>
             <Link to="/edit-profile">
               <Button variant="filled" style={{ marginTop: '10px' }}>
                 Edit Profile
               </Button>
             </Link>
-          </Flex>
-          <Flex direction="column" gap="xs">
-            <Text size="xl">{`${userData?.firstName || ''} ${userData?.lastName || ''}`}</Text>
-            <Text size="sm" color="gray" style={{ marginBottom: '10px' }}>
-              {userData?.email || ''}
-            </Text>
-          </Flex>
+            </Container>
         </Flex>
       </Paper>
     </Container>
