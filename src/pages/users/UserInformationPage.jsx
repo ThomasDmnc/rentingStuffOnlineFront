@@ -39,20 +39,22 @@ function UserInformationPage() {
           <Paper bg="#F2F2F2" padding="md">
             <Flex
               gap="md"
-              justify="center"
+              justify="space-between"
               align="center"
               direction="column"
               wrap="wrap"
             >
-              <Image
-                src={userData?.imageUrl || "../src/assets/defaultAvatar.png"}
-                w={200}
-                h={200}
-                fit="contain"
-                radius="50%"
-                alt={`${userData?.firstName || ""} ${userData?.lastName || ""}`}
-              />
-
+              <Container id="form-container">
+                <Image
+                  src={userData?.imageUrl || "../src/assets/defaultAvatar.png"}
+                  width={150}
+                  height={150}
+                  radius="md"
+                  alt={`${userData?.firstName || ""} ${
+                    userData?.lastName || ""
+                  }`}
+                />
+              </Container>
               <Container id="form-container">
                 <Text size="xl">{`${userData?.firstName || ""} ${
                   userData?.lastName || ""
