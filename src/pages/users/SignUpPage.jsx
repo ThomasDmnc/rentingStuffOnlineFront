@@ -114,16 +114,19 @@ function SignupPage() {
 
   return (
     <Flex direction="column" justify="center">
-      <Title
-        order={1}
-        fw={900}
-        c="#288BE2">
-        Sign Up</Title>
+      <Title order={1} fw={900} c="#288BE2">
+        Sign Up
+      </Title>
       <Flex wrap="wrap" w="100%" justify="center">
         {imageLoading ? (
           <Loader color="blue" size="10em" />
         ) : (
-          <Image src={newForm.getInputProps("imgUrl").value} h="10em" />
+          <Image
+            src={newForm.getInputProps("imgUrl").value}
+            h="10em"
+            w="10em"
+            radius="100"
+          />
         )}
 
         <Flex direction="column" justify="space-evenly">
@@ -134,8 +137,10 @@ function SignupPage() {
             onChange={setFile}
           />
           <Flex justify="space-evenly">
-          <Button mr="1em" onClick={uploadImage}>Upload</Button>
-          <Button onClick={removeImage}>Remove</Button>
+            <Button mr="1em" onClick={uploadImage}>
+              Upload
+            </Button>
+            <Button onClick={removeImage}>Remove</Button>
           </Flex>
         </Flex>
 

@@ -1,11 +1,17 @@
-
-import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Grid, Image, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
-import { AuthContext } from '../../contexts/AuthContext';
-
-
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import {
+  Grid,
+  Image,
+  TextInput,
+  Button,
+  FileInput,
+  Card,
+  Flex,
+  Loader,
+} from "@mantine/core";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const EditUserInformationPage = () => {
   const { id } = useParams();
@@ -15,14 +21,15 @@ const EditUserInformationPage = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
-  const [isLoading,setIsLoading] = useState (true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {
-      setUserData(response.data); 
-      setIsLoading(false);
-    });
-
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`)
+      .then((response) => {
+        setUserData(response.data);
+        setIsLoading(false);
+      });
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -59,65 +66,67 @@ const EditUserInformationPage = () => {
     setFile(selectedFile);
   };
 
-
-  return  (<>
-  {isLoading?(<Flex justify="center" align="center">
+  return (
+    <>
+      {isLoading ? (
+        <Flex justify="center" align="center">
           <Loader color="#288BE2" size="20em" />
-        </Flex>):(
-      <Grid>
-        <Grid.Col span={{ base: 12, xs: 12, md: 4, lg: 4 }}>
-        <Card bg="#F2F2F2">
-          <Card.Section >
-            {userData && (
-              <div style={{ marginBottom: '10px' }}>
-                <Image
-                  src={userData.imageUrl}
-                  width={150}
-                  height={150}
-                  radius="md"
-                  alt={`${userData.firstName} ${userData.lastName}`}
+        </Flex>
+      ) : (
+        <Grid>
+          <Grid.Col span={{ base: 12, xs: 12, md: 4, lg: 4 }} justify="center">
+            <Card bg="#F2F2F2" top="1.5em">
+              <Card.Section>
+                {userData && (
+                  <Flex justify="center">
+                    <Image
+                      src={userData.imageUrl}
+                      w={150}
+                      h={150}
+                      fit="cover"
+                      radius="50%"
+                      alt={`${userData.firstName} ${userData.lastName}`}
+                    />
+                  </Flex>
+                )}
+                <FileInput
+                  label="Profile image"
+                  placeholder="Click to upload"
+                  value={file}
+                  onChange={setFile}
                 />
-              </div>
-            )}
-            <FileInput
-              label="Profile image"
-              placeholder="Click to upload"
-              value={file}
-              onChange={setFile}
-            />
-          </Card.Section>
-        </Card>
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, xs: 12, md: 8, lg: 8}}>
-          <TextInput
-            name="firstName"
-            label="First Name"
-            mt="1em"
-            value={userData?.firstName || ''}
-            onChange={handleInputChange}
-          />
-          <TextInput
-            name="lastName"
-            label="Last Name"
-            mt="1em"
-            value={userData?.lastName || ''}
-            onChange={handleInputChange}
-          />
-          <TextInput
-            name="email"
-            label="Email"
-            mt="1em"
-            value={userData?.email || ''}
-            onChange={handleInputChange}
-          />
-          <Button mt="1em" variant="filled" onClick={handleSaveChanges}>
-            Save Changes
-          </Button>
+              </Card.Section>
+            </Card>
           </Grid.Col>
-          </Grid>
+          <Grid.Col span={{ base: 12, xs: 12, md: 8, lg: 8 }}>
+            <TextInput
+              name="firstName"
+              label="First Name"
+              mt="1em"
+              value={userData?.firstName || ""}
+              onChange={handleInputChange}
+            />
+            <TextInput
+              name="lastName"
+              label="Last Name"
+              mt="1em"
+              value={userData?.lastName || ""}
+              onChange={handleInputChange}
+            />
+            <TextInput
+              name="email"
+              label="Email"
+              mt="1em"
+              value={userData?.email || ""}
+              onChange={handleInputChange}
+            />
+            <Button mt="1em" variant="filled" onClick={handleSaveChanges}>
+              Save Changes
+            </Button>
+          </Grid.Col>
+        </Grid>
       )}
-  </>
-
+    </>
   );
 };
 
