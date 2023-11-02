@@ -1,8 +1,8 @@
 import "dayjs/locale/de";
 import "@mantine/dates/styles.css";
-import { Button, TextInput, Title, Text } from "@mantine/core";
+import { Button, Textarea, Title, Text, Flex } from "@mantine/core";
 import { useState } from "react";
-import { DatePicker, Calendar, Month } from "@mantine/dates";
+import { DatePicker } from "@mantine/dates";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -38,31 +38,41 @@ function EditRequest() {
     }
 
     return (
-        <>
+      <>
       <Title order={1} fw={900} c="#288BE2" size="52" mt="5rem" mb="5rem">
         Edit your request
       </Title>
       <form onSubmit={handleSubmit}>
-        <TextInput
-          label="Your message to the owner"
+        <Textarea
+          label="Your message to the owner:"
           placeholder="Please write your message here."
           value={requestMessageData}
+          mb="2em"
+          mt="2em"
           onChange={(event) => setRequestMessageData(event.currentTarget.value)}
-          mb="1rem"
         />
         <Text>When do you want to rent the equipment:</Text>
+        <Flex 
+        direction="column"
+        align="center"
+        justify="center"
+        mt="2em"
+        mb="2em"> 
         <DatePicker
           type="range"
           minDate={new Date()}
           placeholder="Pick date"
           label="Event date"
           required
-          value={dates}
-          onChange={(event) => setDates(event)}
+          onChange={(event) => {
+            setDates(event);
+          }}
         />
-        <Button type="submit">Create your comment</Button>
+        <Button mt="2em"
+        mb="2em" type="submit">Edit your request</Button>
+        </Flex>
       </form>
-        </>
+    </>
     );
 }
 

@@ -98,6 +98,21 @@ function EquipmentDetails() {
           >
             {equipment.condition}
           </Badge>
+          <Text>Categories:</Text>
+          {equipment.categories.map((category) => {
+            return(
+              <>
+                <Badge
+                color="#288BE2"
+                size="lg"
+                radius="md"
+                tt="capitalize"
+              >
+                {category}
+              </Badge>
+            </>
+            )
+          })}
           <Title order={4} fw={900}>
             Description:
           </Title>

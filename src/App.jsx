@@ -1,7 +1,7 @@
 import "@mantine/core/styles.css";
 import 'dayjs/locale/de';
 import Navbar from "./components/Navbar";
-import { Container } from "@mantine/core";
+import { Container, Flex } from "@mantine/core";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import SignupPage from "./pages/users/SignUpPage";
@@ -20,9 +20,10 @@ import CreateRequest from "./pages/requests/CreateRequestPage";
 import EditRequest from "./pages/requests/EditRequestPage";
 import UserRequests from "./pages/users/UserRequestsPage";
 import Footer from "./components/Footer";
+
 function App() {
-  const containerProps = {
-    h: "100vh",
+  const containerProps = { 
+    h: "100vh"
   };
   return (
     <>
@@ -130,7 +131,6 @@ function App() {
         </Routes>
         <Footer />
       </Container>
-      
     </>
   );
 }

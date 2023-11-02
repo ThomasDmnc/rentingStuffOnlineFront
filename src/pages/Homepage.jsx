@@ -20,7 +20,7 @@ function Homepage() {
   const [selectedTag, setSelectedTag] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
 
   const getEquipments = () => {
     let url = `${import.meta.env.VITE_API_URL}/api/equipments?available=true`;
@@ -163,21 +163,21 @@ function Homepage() {
           <Menu.Dropdown>
             <MenuItem
               onClick={() => {
-                setItemsPerPage(10), setCurrentPage(1);
+                setItemsPerPage(12), setCurrentPage(1);
               }}
             >
               10
             </MenuItem>
             <MenuItem
               onClick={() => {
-                setItemsPerPage(25), setCurrentPage(1);
+                setItemsPerPage(24), setCurrentPage(1);
               }}
             >
               25
             </MenuItem>
             <MenuItem
               onClick={() => {
-                setItemsPerPage(50), setCurrentPage(1);
+                setItemsPerPage(48), setCurrentPage(1);
               }}
             >
               50
