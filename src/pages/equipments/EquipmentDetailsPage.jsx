@@ -39,16 +39,19 @@ function EquipmentDetails() {
   };
 
   const getOwnerComments = () => {
-    if (owner && JSON.stringify(owner) !== '{}') {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`)
-      .then((response) => {
-        setComments(response.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      }); }
+    if (owner && JSON.stringify(owner) !== "{}") {
+      axios
+        .get(
+          `${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`
+        )
+        .then((response) => {
+          setComments(response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -101,18 +104,13 @@ function EquipmentDetails() {
           </Badge>
           <Text>Categories:</Text>
           {equipment.categories.map((category) => {
-            return(
+            return (
               <>
-                <Badge
-                color="#288BE2"
-                size="lg"
-                radius="md"
-                tt="capitalize"
-              >
-                {category}
-              </Badge>
-            </>
-            )
+                <Badge color="#288BE2" size="lg" radius="md" tt="capitalize">
+                  {category}
+                </Badge>
+              </>
+            );
           })}
           <Title order={4} fw={900}>
             Description:
@@ -175,7 +173,7 @@ function EquipmentDetails() {
         {isLoggedIn ? (
           <>
             <Text mt={50}>
-              Did you rented this equipment from {equipment.ownedBy.firstName}{" "}
+              Did you rent this equipment from {equipment.ownedBy.firstName}{" "}
               {equipment.ownedBy.lastName}?
             </Text>
             <Text>Please leave a comment:</Text>
