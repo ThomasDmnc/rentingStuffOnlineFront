@@ -6,7 +6,7 @@ import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function SentRequestsGrid({ allSentRequests }) {
+function SentRequestsGrid({ allSentRequests, magicFunction }) {
   const [requests, setRequests] = useState(allSentRequests);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ function SentRequestsGrid({ allSentRequests }) {
           return request._id != requestId;
         });
         setRequests(newRequests);
+        magicFunction()
       })
       .catch((err) => {
         console.log(err);
@@ -111,7 +112,7 @@ function SentRequestsGrid({ allSentRequests }) {
                       >
                         Edit
                       </Button>
-                      <Button onClick={() => handleDeleteRequest(request._id)}>
+                      <Button variant="filled" color="#CA1747" onClick={() => handleDeleteRequest(request._id)}>
                         Delete
                       </Button>
                     </Flex>
