@@ -114,7 +114,11 @@ function SignupPage() {
 
   return (
     <Flex direction="column" justify="center">
-      <Title>Sign Up</Title>
+      <Title
+        order={1}
+        fw={900}
+        c="#288BE2">
+        Sign Up</Title>
       <Flex wrap="wrap" w="100%" justify="center">
         {imageLoading ? (
           <Loader color="blue" size="10em" />
@@ -122,16 +126,18 @@ function SignupPage() {
           <Image src={newForm.getInputProps("imgUrl").value} h="10em" />
         )}
 
-        <div>
+        <Flex direction="column" justify="space-evenly">
           <FileInput
             label="Profile picture"
             placeholder="click to upload"
             value={file}
             onChange={setFile}
           />
-          <Button onClick={uploadImage}>Upload</Button>
+          <Flex justify="space-evenly">
+          <Button mr="1em" onClick={uploadImage}>Upload</Button>
           <Button onClick={removeImage}>Remove</Button>
-        </div>
+          </Flex>
+        </Flex>
 
         <Container w="100%">
           <Paper bg="#F2F2F2" padding="xl">
@@ -140,26 +146,31 @@ function SignupPage() {
                 label="First Name"
                 placeholder="Enter first name"
                 name="firstName"
+                mt="1em"
                 {...newForm.getInputProps("firstName")}
               />
               <TextInput
                 label="Last Name"
                 name="lastName"
+                mt="1em"
                 {...newForm.getInputProps("lastName")}
               />
               <TextInput
                 label="Email"
                 name="email"
+                mt="1em"
                 {...newForm.getInputProps("email")}
               />
               <PasswordInput
                 label="Password"
                 name="password"
+                mt="1em"
                 {...newForm.getInputProps("password")}
               />
               <PasswordInput
                 label="Confirm Password"
                 name="password"
+                mt="1em"
                 {...newForm.getInputProps("confirmPassword")}
               />
               {file && !fileUploaded && (
@@ -167,12 +178,13 @@ function SignupPage() {
                   icon={xIcon}
                   color="red"
                   title="Stop!"
+                  mt="1em"
                   withCloseButton={false}
                 >
                   Please upload picture before submitting
                 </Notification>
               )}
-              <Button type="submit" variant="filled">
+              <Button mt="1em" type="submit" variant="filled">
                 Sign Up
               </Button>
             </form>

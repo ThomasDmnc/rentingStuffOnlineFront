@@ -10,8 +10,6 @@ function UserInformationPage() {
   const [userData, setUserData] = useState(null);
   const [isLoading,setIsLoading] = useState (true);
 
-
-  console.log(userId);
   useEffect(() => {
     
     axios.get(`${import.meta.env.VITE_API_URL}/api/user/${userId}`).then((response) => {

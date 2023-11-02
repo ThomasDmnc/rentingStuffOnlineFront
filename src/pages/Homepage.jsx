@@ -86,11 +86,9 @@ function Homepage() {
   const handleSearch = () => {
     if (equipments) {
       const regex = new RegExp(`.*${searchTerm}.*`, "i");
-      console.log(regex);
       const tempFilteredEquipments = equipments.filter((currentEquipment) => {
         return regex.test(currentEquipment.name);
       });
-      console.log(tempFilteredEquipments);
       setFilteredEquipments(tempFilteredEquipments);
     }
     setCurrentPage(1);

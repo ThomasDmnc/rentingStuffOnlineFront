@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Paper, Image, Grid, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
+import { Grid, Image, TextInput, Button,FileInput, Card, Flex, Loader } from '@mantine/core';
 import { AuthContext } from '../../contexts/AuthContext';
 
 
@@ -64,26 +64,17 @@ const EditUserInformationPage = () => {
   {isLoading?(<Flex justify="center" align="center">
           <Loader color="#288BE2" size="20em" />
         </Flex>):(
-    
-    <Container size="sm">
-    <Paper bg="#F2F2F2" padding="md">
-      <Flex
-        gap="md"
-        justify="space-between"
-        align={['center', 'center', 'start']}
-        direction={['column', 'column', 'row']}
-        wrap="wrap"
-       
-      >
-        <Container id="form-container">
-        <Card>
-          <Card.Section>
+      <Grid>
+        <Grid.Col span={{ base: 12, xs: 12, md: 4, lg: 4 }}>
+        <Card bg="#F2F2F2">
+          <Card.Section >
             {userData && (
               <div style={{ marginBottom: '10px' }}>
                 <Image
                   src={userData.imageUrl}
                   width={150}
                   height={150}
+                  radius="md"
                   alt={`${userData.firstName} ${userData.lastName}`}
                 />
               </div>
@@ -95,35 +86,36 @@ const EditUserInformationPage = () => {
               onChange={setFile}
             />
           </Card.Section>
-        </Card></Container>
-
-        
-        <Container id="form-container">
+        </Card>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, xs: 12, md: 8, lg: 8}}>
           <TextInput
             name="firstName"
             label="First Name"
+            mt="1em"
             value={userData?.firstName || ''}
             onChange={handleInputChange}
           />
           <TextInput
             name="lastName"
             label="Last Name"
+            mt="1em"
             value={userData?.lastName || ''}
             onChange={handleInputChange}
           />
           <TextInput
             name="email"
             label="Email"
+            mt="1em"
             value={userData?.email || ''}
             onChange={handleInputChange}
           />
-          <Button variant="filled" onClick={handleSaveChanges}>
+          <Button mt="1em" variant="filled" onClick={handleSaveChanges}>
             Save Changes
           </Button>
-        </Container>
-      </Flex>
-    </Paper>
-  </Container>)}
+          </Grid.Col>
+          </Grid>
+      )}
   </>
 
   );

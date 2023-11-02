@@ -46,7 +46,7 @@ function UserRequests() {
   useEffect(() => {
     fetchAllRequests();
   }, []);
-  console.log(sentRequests);
+
   return (
     <>
       <Title
