@@ -84,7 +84,7 @@ const EditUserInformationPage = () => {
                       w={150}
                       h={150}
                       fit="contain"
-                      radius="50%"
+                      radius="xl"
                       alt={`${userData.firstName} ${userData.lastName}`}
                     />
                   </Flex>
