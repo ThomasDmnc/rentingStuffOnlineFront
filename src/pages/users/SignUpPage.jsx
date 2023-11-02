@@ -29,6 +29,8 @@ function SignupPage() {
 
   const [imageLoading, setImageLoading] = useState(false);
 
+  const [emailTaken, setEmailTaken] = useState(false);
+
   useEffect(() => {
     setFileUploaded(false);
   }, [file]);
@@ -60,6 +62,11 @@ function SignupPage() {
         value !== values.password ? "Passwords do not match" : null,
     },
   });
+
+  useEffect(() => {
+    setEmailTaken(false);
+  }, [newForm.getInputProps("email").value]);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -79,6 +86,7 @@ function SignupPage() {
           navigate("/login");
         })
         .catch((err) => {
+          setEmailTaken(true);
           console.log(err);
         });
     } else {
@@ -156,24 +164,28 @@ function SignupPage() {
               />
               <TextInput
                 label="Last Name"
+                placeholder="Enter last name"
                 name="lastName"
                 mt="1em"
                 {...newForm.getInputProps("lastName")}
               />
               <TextInput
                 label="Email"
+                placeholder="Enter email"
                 name="email"
                 mt="1em"
                 {...newForm.getInputProps("email")}
               />
               <PasswordInput
                 label="Password"
+                placeholder="Enter password"
                 name="password"
                 mt="1em"
                 {...newForm.getInputProps("password")}
               />
               <PasswordInput
                 label="Confirm Password"
+                placeholder="Repeat password"
                 name="password"
                 mt="1em"
                 {...newForm.getInputProps("confirmPassword")}
@@ -187,6 +199,17 @@ function SignupPage() {
                   withCloseButton={false}
                 >
                   Please upload picture before submitting
+                </Notification>
+              )}
+              {emailTaken && (
+                <Notification
+                  icon={xIcon}
+                  color={"red"}
+                  title="Uhlala"
+                  mt="1em"
+                  withCloseButton={false}
+                >
+                  Seems like this email is already in use
                 </Notification>
               )}
               <Button mt="1em" type="submit" variant="filled">
