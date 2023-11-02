@@ -83,7 +83,7 @@ const EditUserInformationPage = () => {
                       src={userData.imageUrl}
                       w={150}
                       h={150}
-                      fit="cover"
+                      fit="contain"
                       radius="50%"
                       alt={`${userData.firstName} ${userData.lastName}`}
                     />

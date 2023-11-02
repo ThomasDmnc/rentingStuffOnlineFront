@@ -48,7 +48,7 @@ function UserInformationPage() {
                 src={userData?.imageUrl || "../src/assets/defaultAvatar.png"}
                 w={200}
                 h={200}
-                fit="cover"
+                fit="contain"
                 radius="50%"
                 alt={`${userData?.firstName || ""} ${userData?.lastName || ""}`}
               />
