@@ -164,21 +164,21 @@ function Homepage() {
                 setItemsPerPage(12), setCurrentPage(1);
               }}
             >
-              10
+              12
             </MenuItem>
             <MenuItem
               onClick={() => {
                 setItemsPerPage(24), setCurrentPage(1);
               }}
             >
-              25
+              24
             </MenuItem>
             <MenuItem
               onClick={() => {
                 setItemsPerPage(48), setCurrentPage(1);
               }}
             >
-              50
+              48
             </MenuItem>
           </Menu.Dropdown>
         </Menu>

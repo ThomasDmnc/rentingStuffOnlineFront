@@ -31,7 +31,6 @@ function EquipmentDetails() {
       .get(`${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`)
       .then((response) => {
         setEquipment(response.data);
-        setIsLoading(false);
         setOwner(response.data.ownedBy);
       })
       .catch((error) => {
@@ -40,14 +39,16 @@ function EquipmentDetails() {
   };
 
   const getOwnerComments = () => {
+    if (owner && JSON.stringify(owner) !== '{}') {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/comments?ownedBy=${owner._id}`)
       .then((response) => {
         setComments(response.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
-      });
+      }); }
   };
 
   useEffect(() => {
