@@ -27,8 +27,6 @@ function CommentGrid({ allcomments }) {
     setComments(allcomments);
   }, [allcomments]);
 
-  console.log(typeof comments);
-  console.log(comments);
   return isLoading ? (
     <>
       <Flex justify="center" align="center">

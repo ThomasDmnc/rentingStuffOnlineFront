@@ -1,6 +1,6 @@
 import "dayjs/locale/de";
 import "@mantine/dates/styles.css";
-import { Button, Textarea, Title, Text, Flex, rem } from "@mantine/core";
+import { Button, Textarea, Title, Text } from "@mantine/core";
 import { useState } from "react";
 import { DatePickerInput } from "@mantine/dates";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ function CreateRequest() {
           "Access-Control-Allow-Origin": true,
         },
       })
-      .then((response) => {
+      .then(() => {
         navigate("/");
       })
       .catch((err) => {

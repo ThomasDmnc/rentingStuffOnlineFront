@@ -1,7 +1,6 @@
 import "dayjs/locale/de";
 import "@mantine/dates/styles.css";
 import { Button, Textarea, Title, Text } from "@mantine/core";
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "@mantine/form";
@@ -44,8 +43,7 @@ function EditRequest() {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": true,
             },})
-        .then((response) => {
-            console.log(response)
+        .then(() => {
             navigate(-1)
         })
         .catch((err) => {
