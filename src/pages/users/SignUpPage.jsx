@@ -87,7 +87,6 @@ function SignupPage() {
         })
         .catch((err) => {
           setEmailTaken(true);
-          console.log(err);
         });
     } else {
       newForm.validate();
