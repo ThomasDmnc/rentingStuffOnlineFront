@@ -48,7 +48,7 @@ function CreateEquipment() {
       name: (value) =>
         value.length < 3 ? "Name has to be at least 3 characters" : null,
       description: (value) =>
-        value.length > 0 && (value.length < 20 || value.length > 150)
+        value.length < 20 || value.length > 150
           ? "Description needs to be between 20-150 characters"
           : null,
       condition: (value) => (value.length < 1 ? "Choose a condition" : null),
@@ -156,12 +156,12 @@ function CreateEquipment() {
                   mt={20}
                 />
                 <Flex justify="center" align="center">
-                <Button mt={20} mr={2} variant="filled" onClick={uploadImage}>
-                  Upload
-                </Button>
-                <Button mt={20} mr={2} variant="filled" onClick={removeImage}>
-                  Remove
-                </Button>
+                  <Button mt={20} mr={2} variant="filled" onClick={uploadImage}>
+                    Upload
+                  </Button>
+                  <Button mt={20} mr={2} variant="filled" onClick={removeImage}>
+                    Remove
+                  </Button>
                 </Flex>
               </Card.Section>
             </Card>
@@ -179,6 +179,7 @@ function CreateEquipment() {
               <Textarea
                 label="Description of your equipment:"
                 placeholder="Enter Equipment description"
+                withAsterisk
                 id="descriptionInput"
                 mt={20}
                 {...newForm.getInputProps("description")}
