@@ -46,7 +46,7 @@ function UserRequests() {
   useEffect(() => {
     fetchAllRequests();
   }, []);
-  console.log(sentRequests);
+
   return (
     <>
       <Title
@@ -70,7 +70,7 @@ function UserRequests() {
             </Grid.Col>
           ) : (
             <Grid.Col>
-              <SentRequestsGrid allSentRequests={sentRequests} />
+              <SentRequestsGrid allSentRequests={sentRequests} magicFunction={fetchAllRequests}/>
             </Grid.Col>
           )}
         </Grid>
@@ -93,7 +93,7 @@ function UserRequests() {
         <Grid gutter="lg" spacing="lg" mt={20} mb={20}>
           {!receivedRequests || receivedRequests.length === 0 ? (
             <Grid.Col mt="1em">
-              <Text>You didn't received any request to rent equipment.</Text>
+              <Text>You didn&apos;t received any request to rent equipment.</Text>
             </Grid.Col>
           ) : (
             <Grid.Col>

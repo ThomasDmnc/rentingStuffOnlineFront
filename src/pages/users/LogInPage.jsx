@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Container, Paper, TextInput, Button } from '@mantine/core';
+import { Container, Paper, TextInput, Button, Title } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from '../../contexts/AuthContext.jsx'
@@ -45,7 +45,13 @@ function LoginPage() {
   return (
     <Container size="xs">
       <Paper  bg="#F2F2F2" padding="xl">
-        <h1>Login</h1>
+      <Title
+        order={1}
+        fw={900}
+        c="#288BE2"
+      >
+        Login
+      </Title>
         <form onSubmit={handleSubmit}>
           <TextInput
             label="Email Address"

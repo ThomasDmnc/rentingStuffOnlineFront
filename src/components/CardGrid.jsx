@@ -32,7 +32,7 @@ function CardGrid({ isUpdate, allEquipments }) {
             return (
               <Grid.Col
                 key={equipment.id}
-                span={{ base: 12, xs: 6, md: 4, lg: 4 }}
+                span={{ base: 12, xs: 4, md: 4, lg: 4 }}
               >
                 <EquipmentCard props={equipment} />
                 {isUpdate ? (

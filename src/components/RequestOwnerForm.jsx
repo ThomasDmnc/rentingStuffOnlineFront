@@ -68,6 +68,8 @@ function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
             value={acceptation}
             onChange={setAcceptation}
             withAsterisk
+            mt="1em"
+            mb="1em"
           >
             <Group mt="xs">
               <Radio value="accepted" label="Accept" />
@@ -76,6 +78,8 @@ function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
           </Radio.Group>
           <Textarea
             label="Write your answer"
+            mt="1em"
+            mb="1em"
             placeholder="Hello 👋 My equipment is available. Please reach me out to this phone number so we can meet up."
             onChange={ (event) => setAnswer(event.currentTarget.value)}
           />
