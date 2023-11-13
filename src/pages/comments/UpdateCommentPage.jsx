@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Rating, TextInput, Text, Button , Title, rem} from "@mantine/core";
+import { Rating, TextInput, Text, Button , Title} from "@mantine/core";
 import { useParams, useNavigate } from "react-router-dom";
 
 function UpdateComment() {
@@ -33,7 +33,6 @@ function UpdateComment() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = { content, rating, ownedBy, createdBy };
-    console.log(payload)
     axios
       .put(`${import.meta.env.VITE_API_URL}/api/comments/${commentId}`, payload, {
         headers: {

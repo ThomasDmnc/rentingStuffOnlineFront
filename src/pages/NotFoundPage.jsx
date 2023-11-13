@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container, Paper, Text, Button, rem } from '@mantine/core';
+import { Container, Paper, Text, Button } from '@mantine/core';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();

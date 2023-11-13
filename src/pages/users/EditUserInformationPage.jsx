@@ -53,7 +53,6 @@ const EditUserInformationPage = () => {
         formData
       )
       .then((response) => {
-        console.log("User data updated successfully");
         navigate("/profile");
       })
       .catch((error) => {

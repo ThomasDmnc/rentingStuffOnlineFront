@@ -28,7 +28,6 @@ function CreateComment() {
         },
       })
       .then((response) => {
-        console.log(response);
         navigate(-1);
       })
       .catch((err) => {

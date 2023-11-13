@@ -73,7 +73,6 @@ function EditEquipment() {
     axios
       .put(`${import.meta.env.VITE_API_URL}/api/equipments/upload`, formData)
       .then((response) => {
-        console.log(response);
         setImageUrl(response.data.file);
         setFileUploaded(true);
       })
@@ -129,7 +128,7 @@ function EditEquipment() {
         imageUrl,
         available,
       };
-      console.log(payload);
+
       axios
         .put(
           `${import.meta.env.VITE_API_URL}/api/equipments/${equipmentId}`,
@@ -142,7 +141,6 @@ function EditEquipment() {
           }
         )
         .then((response) => {
-          console.log(response);
           navigate(`/equipments/${equipmentId}`);
         })
         .catch((error) => {

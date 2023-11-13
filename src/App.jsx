@@ -22,8 +22,6 @@ import UserRequests from "./pages/users/UserRequestsPage";
 import Footer from "./components/Footer";
 
 function App() {
-  const containerProps = {
-  };
   return (
     <>
       <AppShell

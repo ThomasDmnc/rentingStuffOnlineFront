@@ -71,7 +71,6 @@ function SignupPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newForm.isValid());
     if (newForm.isValid() && ((fileUploaded && file) || !file)) {
       const formData = {
         firstName: newForm.getInputProps("firstName").value,
