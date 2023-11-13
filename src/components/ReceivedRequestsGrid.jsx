@@ -18,7 +18,7 @@ import { DateInput } from "@mantine/dates";
 import RequestOwnerForm from "./RequestOwnerForm";
 import axios from "axios";
 
-function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
+function ReceivedRequestsGrid({ allReceivedRequests, fetchRequests }) {
   const [requests, setRequests] = useState();
 
   useEffect(() => {
@@ -117,7 +117,7 @@ function ReceivedRequestsGrid({ allReceivedRequests, magicFunction }) {
                     {request.status === "pending" ? (
                       <RequestOwnerForm
                         requestData={request}
-                        yetAnotherMagicFunction={magicFunction}
+                        fetchAllRequests={fetchRequests}
                       />
                     ) : null}
                     <Grid.Col>
