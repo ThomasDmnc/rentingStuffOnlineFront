@@ -70,7 +70,7 @@ function UserRequests() {
             </Grid.Col>
           ) : (
             <Grid.Col>
-              <SentRequestsGrid allSentRequests={sentRequests} magicFunction={fetchAllRequests}/>
+              <SentRequestsGrid allSentRequests={sentRequests} fetchRequests={fetchAllRequests}/>
             </Grid.Col>
           )}
         </Grid>
@@ -99,7 +99,7 @@ function UserRequests() {
             <Grid.Col>
               <ReceivedRequestsGrid
                 allReceivedRequests={receivedRequests}
-                magicFunction={fetchAllRequests}
+                fetchRequests={fetchAllRequests}
               />
             </Grid.Col>
           )}

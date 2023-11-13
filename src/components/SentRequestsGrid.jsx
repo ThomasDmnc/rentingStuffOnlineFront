@@ -6,7 +6,7 @@ import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function SentRequestsGrid({ allSentRequests, magicFunction }) {
+function SentRequestsGrid({ allSentRequests, fetchRequests }) {
   const [requests, setRequests] = useState(allSentRequests);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function SentRequestsGrid({ allSentRequests, magicFunction }) {
           return request._id != requestId;
         });
         setRequests(newRequests);
-        magicFunction()
+        fetchRequests()
       })
       .catch((err) => {
         console.log(err);

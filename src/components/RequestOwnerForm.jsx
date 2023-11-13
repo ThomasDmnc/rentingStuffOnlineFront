@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 
-function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
+function RequestOwnerForm({ requestData, fetchAllRequests }) {
     const [request, setRequest] = useState(requestData);
     const [acceptation, setAcceptation] = useState("");
     const [answer, setAnswer] = useState("");
@@ -35,7 +35,7 @@ function RequestOwnerForm({ requestData, yetAnotherMagicFunction }) {
               "Access-Control-Allow-Origin": true,
             },})
         .then(() => {
-            yetAnotherMagicFunction()
+          fetchAllRequests()
         }).catch((error) => {
             console.log(error)
         })
