@@ -29,7 +29,6 @@ function AuthProviderWrapper(props) {
         .then((response) => {
           // If the server verifies that JWT token is valid
           const user = response.data;
-          // Update state variables
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
@@ -64,8 +63,6 @@ function AuthProviderWrapper(props) {
   };
 
   useEffect(() => {
-    // Run the function after the initial render,
-    // after the components in the App render for the first time.
     authenticateUser();
   }, []);
 
