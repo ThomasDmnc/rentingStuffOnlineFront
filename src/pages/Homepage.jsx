@@ -101,8 +101,6 @@ function Homepage() {
     indexOfLastItem
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   return (
     <>
       <section className="banner">

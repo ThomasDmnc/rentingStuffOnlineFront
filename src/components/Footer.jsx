@@ -1,9 +1,6 @@
 import { Flex, Text } from '@mantine/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
-  const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} style={{ fontSize: '30px' }} />;
 
   return (
     <footer

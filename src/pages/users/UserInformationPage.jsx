@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   Flex,
@@ -6,7 +6,6 @@ import {
   Paper,
   Image,
   Text,
-  Grid,
   Button,
   Loader,
 } from "@mantine/core";
